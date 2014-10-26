@@ -1,0 +1,687 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"setMin",
+				"setMinimumWidth	function"
+			],
+			[
+				"btnS",
+				"btnSweepCommand	statement"
+			],
+			[
+				"group",
+				"mspCommandGroup"
+			],
+			[
+				"swee",
+				"groupSweeper"
+			],
+			[
+				"sweepVo",
+				"sweepVoltageMin	statement"
+			],
+			[
+				"p",
+				"PyQt4"
+			],
+			[
+				"t",
+				"true"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "curveTracerActions.py",
+			"settings":
+			{
+				"buffer_size": 169,
+				"line_ending": "Unix",
+				"name": "#!/usr/bin/env python3"
+			}
+		},
+		{
+			"file": "curveTracerMainGUI.py",
+			"settings":
+			{
+				"buffer_size": 8246,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "curveTracerPlot.py",
+			"settings":
+			{
+				"buffer_size": 1820,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "curveTracerSweeper.py",
+			"settings":
+			{
+				"buffer_size": 2159,
+				"line_ending": "Unix",
+				"name": "#!/usr/bin/env python3"
+			}
+		},
+		{
+			"file": "curveTracerSerial.py",
+			"settings":
+			{
+				"buffer_size": 1060,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "readme.md",
+			"settings":
+			{
+				"buffer_size": 2031,
+				"line_ending": "Unix",
+				"name": "GENERAL OVERVIEW"
+			}
+		},
+		{
+			"file": "curveTracerPlay.py",
+			"settings":
+			{
+				"buffer_size": 2971,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "curveTracerPlay2.py",
+			"settings":
+			{
+				"buffer_size": 211,
+				"line_ending": "Unix",
+				"name": "#!/usr/bin/env python3"
+			}
+		},
+		{
+			"file": "curveTracerProtocol.py",
+			"settings":
+			{
+				"buffer_size": 614,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 320.0,
+		"selected_items":
+		[
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				"ena",
+				"Package Control: Enable Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Disable Package"
+			],
+			[
+				":q",
+				"Set Syntax: SQL"
+			],
+			[
+				"Package Control: list",
+				"Package Control: List Packages"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"pak",
+				"Package Control: List Packages"
+			]
+		],
+		"width": 408.0
+	},
+	"console":
+	{
+		"height": 120.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/avo/workspace/python",
+		"/home/avo/workspace/python/__pycache__"
+	],
+	"file_history":
+	[
+		"/home/avo/Documents/EDCO4/EDCO4_MIDTERM1.mdown",
+		"/home/avo/.config/tint2/tint2rc",
+		"/home/avo/builds/xpyb-ng/tools/py_client.py",
+		"/home/avo/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/avo/workspace/python/curveTracerSerial.py",
+		"/home/avo/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
+		"/home/avo/.config/compton.conf",
+		"/home/avo/.i3/config",
+		"/home/avo/.compton.conf",
+		"/home/avo/scripts/touchpadsettings.sh",
+		"/home/avo/.config/openbox/rc.xml",
+		"/home/avo/.config/sublime-text-3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/home/avo/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/avo/workspace/python/curveTracerPlay.py",
+		"/home/avo/.config/sublime-text-3/Packages/Anaconda/Default (Linux).sublime-keymap",
+		"/home/avo/workspace/msp430/curveTracer_uart+adc/main.c",
+		"/home/avo/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/avo/.conkyrc",
+		"/home/avo/Pictures/test.txt",
+		"/home/avo/scripts/dmenuCustom.sh",
+		"/home/avo/builds/dmenu-4.5/Makefile",
+		"/home/avo/builds/dmenu-4.5/config.mk",
+		"/home/avo/builds/dmenu-4.5/dmenu.c",
+		"/home/avo/builds/dmenu-4.5/dmenu_run",
+		"/home/avo/builds/dmenu-4.5/draw.h",
+		"/home/avo/.themes/lbobtp-4/openbox-3/themerc",
+		"/home/avo/.themes/lbobtp-5/openbox-3/themerc",
+		"/home/avo/scripts/bspdual.sh",
+		"/home/avo/scripts/monitorswitch.sh",
+		"/home/avo/scripts/dualmon.sh",
+		"/home/avo/.config/bspwm/bspwmrc",
+		"/home/avo/.config/bspwm/autostart",
+		"/home/avo/workspace/python/curveTracerPlot.pyc",
+		"/home/avo/scripts/panel_colors",
+		"/home/avo/scripts/panel",
+		"/home/avo/scripts/panel_bar",
+		"/home/avo/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"mspInst",
+			"msp",
+			"from",
+			"DejaVu Sans Mono Book",
+			"Droid Sans Mono",
+			"Droid Sans",
+			"Terminus",
+			"theme",
+			"follow",
+			"opacity",
+			"font",
+			"voltageSweep",
+			"click",
+			"C-",
+			"True",
+			"commandBox",
+			" commandBox",
+			"self.mspConnectGroup",
+			"\n        ",
+			"mainGrid",
+			"serialConf",
+			"space",
+			"complete",
+			"alt+/",
+			"auto_complete",
+			"auto",
+			"theme",
+			"grey",
+			"lightgrey",
+			"shad",
+			"local",
+			"close",
+			"Tab",
+			"height",
+			"title",
+			"font",
+			"Shade",
+			"S-W-",
+			"S-W-R",
+			"S-W-L",
+			"Frame",
+			"tab",
+			"font"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"Terminus",
+			"DejaVu Sans Mono Book",
+			"Droid Sans Mono",
+			"Droid Sans",
+			"Inconsolata",
+			"sweepVoltage",
+			"False",
+			" self.commandBox",
+			"mspConnectGroup",
+			"gridConnect",
+			"mspConf",
+			"ctrl+space",
+			"white"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "/home/avo/workspace/python"
+		}
+	],
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "curveTracerActions.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 169,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								169,
+								169
+							]
+						],
+						"settings":
+						{
+							"auto_name": "#!/usr/bin/env python3",
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "curveTracerMainGUI.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8246,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4400,
+								4400
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 988.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "curveTracerPlot.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1820,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								74,
+								74
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "curveTracerSweeper.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2159,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1094,
+								1094
+							]
+						],
+						"settings":
+						{
+							"auto_name": "#!/usr/bin/env python3",
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 121.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "curveTracerSerial.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1060,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								22,
+								22
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "readme.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2031,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								243,
+								243
+							]
+						],
+						"settings":
+						{
+							"auto_name": "GENERAL OVERVIEW",
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 136.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "curveTracerPlay.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2971,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1244,
+								1244
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "curveTracerPlay2.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 211,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								211,
+								211
+							]
+						],
+						"settings":
+						{
+							"auto_name": "#!/usr/bin/env python3",
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "curveTracerProtocol.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 614,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								368,
+								368
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 36.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.489196805737,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "",
+	"replace":
+	{
+		"height": 68.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 194.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

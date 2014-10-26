@@ -1,0 +1,184 @@
+
+**** Build of configuration Debug for project curveTracer ****
+
+/opt/ti/ccsv6/utils/bin/gmake -k all 
+Building file: ../main.c
+Invoking: MSP430 Compiler
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/bin/cl430" -vmspx --abi=eabi --data_model=restricted --include_path="/opt/ti/ccsv6/ccs_base/msp430/include" --include_path="/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include" --advice:power=all -g --define=__MSP430F5529__ --diag_warning=225 --display_error_number --diag_wrap=off --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 --printf_support=minimal --preproc_with_compile --preproc_dependency="main.pp"  "../main.c"
+
+>> Compilation failure
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 10: error #20: identifier "class" is undefined
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 11: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 11: error #18: expected a ")"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 13: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 13: error #18: expected a ")"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 17: error #20: identifier "class" is undefined
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 18: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 39: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 40: error #171: expected a declaration
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 41: error #171: expected a declaration
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 77: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 78: error #171: expected a declaration
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 81: error #20: identifier "class" is undefined
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 82: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 105: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/exception", line 173: error #20: identifier "bool" is undefined
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 10: error #20: identifier "class" is undefined
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 11: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 46: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 59: error #20: identifier "nothrow_t" is undefined
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 70: error #71: incomplete type is not allowed
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 70: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 72: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 75: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 79: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 81: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 83: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 86: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 89: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 91: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 94: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 97: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/new", line 100: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/cwchar", line 27: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 18: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 18: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 41: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 42: error #171: expected a declaration
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 99: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 102: error #20: identifier "_Statetype" is undefined
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 103: error #171: expected a declaration
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 106: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 106: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 125: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 125: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 128: error #20: identifier "streampos" is undefined
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 131: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 131: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 246: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 249: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 249: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 341: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 344: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 344: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 436: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 439: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 439: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 441: error #20: identifier "class" is undefined
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 442: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 442: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 445: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 445: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 448: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 448: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 451: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 451: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 454: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 454: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 457: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 457: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 460: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 460: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 463: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 463: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 466: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 467: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 467: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 470: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 471: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 471: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 474: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 475: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 475: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 478: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 479: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 479: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 482: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 482: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 485: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 485: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 488: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 488: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 504: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 504: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 505: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 505: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 506: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 506: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 507: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 507: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 508: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 508: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 509: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 509: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 511: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 511: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 513: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 513: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 515: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 515: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 517: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 517: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 518: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 518: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 519: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 519: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 520: warning #262-D: explicit type is missing ("int" assumed)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 520: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 528: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 528: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 529: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 529: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 529: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 531: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 531: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 531: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 532: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 532: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 532: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 533: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 533: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 533: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 534: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 534: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 534: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 536: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 536: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 536: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 538: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 538: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 538: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 540: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 540: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 540: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 542: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 542: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 542: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 543: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 543: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 543: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 544: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 544: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 544: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 545: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 545: warning #303-D: typedef name has already been declared (with same type)
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/iosfwd", line 545: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/utility", line 8: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/utility", line 8: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/utility", line 46: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/utility", line 47: error #20: identifier "_Ty2" is undefined
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/utility", line 48: error #171: expected a declaration
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/utility", line 51: warning #78-D: this declaration has no storage class or type specifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/utility", line 51: error #66: expected a ";"
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/utility", line 139: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/utility", line 140: error #171: expected a declaration
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/xutility", line 197: warning #12-D: parsing restarts here after previous syntax error
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/xutility", line 216: error #41: expected an identifier
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include/xutility", line 217: error #66: expected a ";"
+Error limit reached.
+100 errors detected in the compilation of "../main.c".
+Compilation terminated.
+gmake: *** [main.obj] Error 1
+gmake: Target `all' not remade because of errors.
+
+**** Build Finished ****

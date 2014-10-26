@@ -1,0 +1,31 @@
+
+**** Build of configuration Debug for project curveTracerMSPG2553 ****
+
+/opt/ti/ccsv6/utils/bin/gmake -k all 
+Building file: ../main.c
+Invoking: MSP430 Compiler
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/bin/cl430" -vmsp --abi=eabi --include_path="/opt/ti/ccsv6/ccs_base/msp430/include" --include_path="/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include" --advice:power=all -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --diag_wrap=off --printf_support=minimal --preproc_with_compile --preproc_dependency="main.pp"  "../main.c"
+"../main.c", line 105: remark #1528-D: (ULP 3.1) Detected flag polling using IFG2. Recommend using an interrupt combined with enter LPMx and ISR
+"../main.c", line 104: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../main.c", line 104: remark #1543-D: (ULP 12.2) Detected for loop with repetitive data transfer. Recommend using DMA
+"../main.c", line 122: remark #1528-D: (ULP 3.1) Detected flag polling using IFG2. Recommend using an interrupt combined with enter LPMx and ISR
+"../main.c", line 116: remark #1530-D: (ULP 5.1) Detected modulo operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 117: remark #2553-D: (ULP 14.1) Array index (involving "i") of type "int". Recommend using "unsigned int"
+"../main.c", line 119: remark #1530-D: (ULP 5.1) Detected divide operation(s). Recommend moving them to RAM during run time or not using as these are processing/power intensive
+"../main.c", line 121: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../main.c", line 123: remark #2553-D: (ULP 14.1) Array index (involving "i") of type "int". Recommend using "unsigned int"
+"../main.c", line 150: remark #1533-D: (ULP 6.1) Detected use of multiplication on a device that has no hardware multiplier
+"../main.c", line 198: remark #1528-D: (ULP 3.1) Detected flag polling using ADC_BUSY. Recommend using an interrupt combined with enter LPMx and ISR
+"../main.c", line 200: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../main.c", line 285: remark #1535-D: (ULP 8.1) variable "power" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+Finished building: ../main.c
+ 
+Building target: curveTracerMSPG2553.out
+Invoking: MSP430 Linker
+"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/bin/cl430" -vmsp --abi=eabi --advice:power=all -g --define=__MSP430G2553__ --diag_warning=225 --display_error_number --diag_wrap=off --printf_support=minimal -z -m"curveTracerMSPG2553.map" --heap_size=80 --stack_size=80 -i"/opt/ti/ccsv6/ccs_base/msp430/include" -i"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/lib" -i"/opt/ti/ccsv6/tools/compiler/msp430_4.3.4/include" --reread_libs --warn_sections --display_error_number --diag_wrap=off --xml_link_info="curveTracerMSPG2553_linkInfo.xml" --rom_model -o "curveTracerMSPG2553.out"  "./main.obj" "../lnk_msp430g2553.cmd" -l"libc.a" 
+<Linking>
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 3 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+Finished building target: curveTracerMSPG2553.out
+ 
+
+**** Build Finished ****

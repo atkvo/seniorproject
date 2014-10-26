@@ -1,0 +1,12 @@
+AbstractTextEditor.Color.Background=29,29,29
+AbstractTextEditor.Color.Background.SystemDefault=false
+AbstractTextEditor.Color.Foreground=255,255,255
+AbstractTextEditor.Color.Foreground.SystemDefault=false
+AbstractTextEditor.Color.SelectionBackground.SystemDefault=false
+AbstractTextEditor.Color.SelectionForeground.SystemDefault=false
+currentLineColor=0,0,0
+eclipse.preferences.version=1
+org.eclipse.cdt.ui.occurrenceIndicationColor=13,103,168
+overviewRuler_migration=migrated_3.1
+spacesForTabs=true
+tabWidth=8
