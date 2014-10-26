@@ -63,11 +63,8 @@ Use CX_FREEZE to test it under Windows. Nvm, Must be built under Windows also. I
 | COMMAND   | Description                                  |
 | --------- | -------------------------------------------- |
 | !V=XXXX\* | Give DAC an output voltage. Must be 4 digits |
-| --------- | -------------------------------------------- |
 | !C?\*     | Read Imonitor                                |
-| --------- | -------------------------------------------- |
 | ----      | Read Temp sensor ** REMOVE                   |
-| --------- | -------------------------------------------- |
 | !V?\*     | Read DUT Voltage                             |
 | --------- | -------------------------------------------- |
 
