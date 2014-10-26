@@ -66,10 +66,13 @@ Use CX_FREEZE to test it under Windows. Nvm, Must be built under Windows also. I
 | !C?\*     | Read Imonitor                                |
 | ----      | Read Temp sensor ** REMOVE                   |
 | !V?\*     | Read DUT Voltage                             |
-| --------- | -------------------------------------------- |
 
-RANGE 0-8192
-From 0-4095 = Positive
-     0 => Vcc*2
-From 4096-8192 = Negative
-     -(Vcc*2) => 0V
+
+# ADC CONVERSION TABLE
+----------------------
+| ADC RAW       | Conversion           |
+| ------------- | -------------------- |
+| 0 -> 4095     | 0 -> +(Vcc\*2)       |
+| 4096 -> 8192  | -(Vcc\*2) => 0V      |
+
+
