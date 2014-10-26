@@ -44,13 +44,21 @@ Use python csv module (?)
 # TODO (Application still under development 10.25.14)
 -----------------------------------------------------
 
-* Utilize signals & slots (New QT4 style)
-* Fix GUI lockup during thread object. (Not behaving like a separate thread...
-
-
+* (in progress) Utilize signals & slots (New QT4 style)
+* (done) Fix GUI lockup during thread object. (Not behaving like a separate thread...
+* Change sweep start to start at MINIMUM voltage (Need dual power supply to begin testing properly)
+* Add CSV output ability
+* Add premature sweep stop
 * Use CX_FREEZE to test it under Windows. Nvm, Must be built under Windows also. Installed required libraries on Windows to build already
+* **ADD CURRENT LIMIT **
 
-** ADD CURRENT LIMIT **
+# Changelog (Started 10.26.14)
+------------------------------
+
+* Fixed GUI lockup. Solution: Call thread object as self.thread
+* Added initial signal & slot work (Signals: when sweep starts, stopped, and updating voltage/current stats)
+ 
+
 
 # COMMAND LIST
 --------------

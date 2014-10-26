@@ -24,7 +24,7 @@ class MainWindow(QtGui.QWidget):
 
         #### MSP CONNECTION CONFIG #########################
         self.mspConfigPortBox = QtGui.QLineEdit(self)
-        self.mspConfigPortBox.setText("/dev/ttyACM1")
+        self.mspConfigPortBox.setText("/dev/ttyUSB0")
         self.mspConfigBaudBox = QtGui.QLineEdit(self)
         self.mspConfigBaudBox.setText("9600")
 
@@ -77,6 +77,7 @@ class MainWindow(QtGui.QWidget):
 
         sweepVoltageMaxLabel = QtGui.QLabel("Max Voltage (mV)")
         self.sweepVoltageMax = QtGui.QLineEdit(self)
+        self.sweepVoltageMax.setText("1000")
         self.sweepVoltageMax.setMinimumWidth(50)
 
         # self.sweepVoltageMax.setFixedWidth(50)
@@ -108,11 +109,11 @@ class MainWindow(QtGui.QWidget):
         self.groupStatus = QtGui.QGroupBox("Statuses")
         gridStatus = QtGui.QGridLayout()
 
-        measuredVoltageLabel = QtGui.QLabel("Voltage: ")
+        measuredVoltageLabel = QtGui.QLabel("Voltage [mV]")
         self.measuredVoltage = QtGui.QLineEdit(self)
         self.measuredVoltage.setReadOnly(True)
 
-        measuredCurrentLabel = QtGui.QLabel("Current: ")
+        measuredCurrentLabel = QtGui.QLabel("Current [mA]")
         self.measuredCurrent = QtGui.QLineEdit(self)
         self.measuredCurrent.setReadOnly(True)
 
@@ -153,22 +154,45 @@ class MainWindow(QtGui.QWidget):
 
     def sweepVoltageAction(self):
         sender = self.sender()
-        if sender.text() == "SWEEP":
+        senderName = sender.text()
+        if senderName == "SWEEP":
             maxV = self.sweepVoltageMax.text()
             minV = self.sweepVoltageMin.text()
             incr = self.sweepVoltageIncr.text()
-            c = cts.SweeperThread(self.mutex, self.mspInst, minV, maxV, incr)
-            c.start()
-            self.btnSweepCommand.setText("STOP")
-            self.toggleSweepField("OFF")
-        elif sender.text() == "STOP":
             try:
-                c.killme()
-                del c
+                self.c = cts.SweepThread(self.mutex, self.mspInst,
+                                         minV, maxV, incr)
+                self.c.signalSweepDone.connect(self.sweepDoneAction)
+                self.c.signalUpdateStats.connect(self.updateStats)
+                self.c.begin()
+            except:
+                print("unable to start")
+        elif senderName == "STOP":
+            try:
+                self.c.stopSweep()
+                # del self.c
+                self.toggleSweepField("ON")
+                self.btnSweepCommand.setText("SWEEP")
             except:
                 print("Could not kill process")
+
+    def sweepDoneAction(self, check):
+        if check is False:
+            self.btnSweepCommand.setText("STOP")
+            self.toggleSweepField("OFF")
+        elif check is True:
+            voltageResults, currentResults = self.c.getResults()
+            print("voltage", voltageResults)
+            print("current", currentResults)
             self.toggleSweepField("ON")
             self.btnSweepCommand.setText("SWEEP")
+        # self.connect()
+
+    def updateStats(self, type, value):
+        if type == "VOLTAGE":
+            self.measuredVoltage.setText(str(value))
+        elif type == "CURRENT":
+            self.measuredCurrent.setText(str(value))
 
     def mspSend(self):
         command = self.commandBox.text()
