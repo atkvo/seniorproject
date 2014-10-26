@@ -8,7 +8,7 @@ Embedded pyplot?
 import sys
 import curveTracerSerial
 import curveTracerSweeper as cts
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 
 
 # If Menubar desired, use QtGui.QMainWindow
@@ -16,6 +16,8 @@ class MainWindow(QtGui.QWidget):
 
     def __init__(self):
         super(MainWindow, self).__init__()
+        QtCore.pyqtRemoveInputHook()
+        self.mutex = QtCore.QMutex()
         self.initUI()
 
     def initUI(self):
@@ -42,15 +44,15 @@ class MainWindow(QtGui.QWidget):
         #### CURVE TRACE APP CONNECTION ####################
         self.mspConnectGroup = QtGui.QGroupBox("Connection")
         self.mspConnectGroup.setFlat(False)
-        btnTest = QtGui.QPushButton("TEST")
+        # btnTest = QtGui.QPushButton("TEST")
         # btnTest.clicked.connect(self.tester)
-        btnTest.clicked.connect(self.sweepVoltageAction)
+        # btnTest.clicked.connect(self.sweepVoltageAction)
         gridConnect = QtGui.QGridLayout()
         gridConnect.addWidget(self.mspConfigPortBox, 0, 0)
         gridConnect.addWidget(self.mspConfigBaudBox, 0, 1)
         gridConnect.addWidget(self.btnMspConnect, 0, 2)
         ############################################
-        gridConnect.addWidget(btnTest, 0, 3) ##########
+        # gridConnect.addWidget(btnTest, 0, 3)
         ############################################
         self.mspConnectGroup.setLayout(gridConnect)
 
@@ -135,17 +137,6 @@ class MainWindow(QtGui.QWidget):
         self.toggleConnectField("ON")
         self.show()
 
-    def tester(self):
-        maxV = self.sweepVoltageMax.text()
-        minV = self.sweepVoltageMin.text()
-        incr = self.sweepVoltageIncr.text()
-        #     tSweep = cts.SweeperThread(self.mspInst, minV, maxV)
-        c = cts.SweeperThread(minV, maxV, incr)
-
-        c.begin()
-        # c.start()
-        print("ok")
-
     def mspConnect(self):
         source = self.sender()
         if source.text() == "CONNECT":
@@ -161,19 +152,23 @@ class MainWindow(QtGui.QWidget):
             self.toggleConnectField("ON")
 
     def sweepVoltageAction(self):
-        self.tester()
-        # sender = self.sender()
-        # if sender.text() == "SWEEP":
-        #     maxV = self.sweepVoltageMax.text()
-        #     minV = self.sweepVoltageMin.text()
-        #     tSweep = cts.SweeperThread(self.mspInst, minV, maxV)
-        #     tSweep.initThread()     # START SWEEPER THREAD HERE
-        #     self.btnSweepCommand.setText("STOP")
-        #     self.toggleSweepField("OFF")
-        # elif sender.text() == "STOP":
-        #     self.toggleSweepField("ON")
-        #     self.btnSweepCommand.setText("SWEEP")
-        #     # KILL THREAD HERE tSweep.kill() ?
+        sender = self.sender()
+        if sender.text() == "SWEEP":
+            maxV = self.sweepVoltageMax.text()
+            minV = self.sweepVoltageMin.text()
+            incr = self.sweepVoltageIncr.text()
+            c = cts.SweeperThread(self.mutex, self.mspInst, minV, maxV, incr)
+            c.start()
+            self.btnSweepCommand.setText("STOP")
+            self.toggleSweepField("OFF")
+        elif sender.text() == "STOP":
+            try:
+                c.killme()
+                del c
+            except:
+                print("Could not kill process")
+            self.toggleSweepField("ON")
+            self.btnSweepCommand.setText("SWEEP")
 
     def mspSend(self):
         command = self.commandBox.text()
@@ -204,11 +199,11 @@ class MainWindow(QtGui.QWidget):
         if value == "ON":
             self.sweepVoltageMin.setEnabled(True)
             self.sweepVoltageMax.setEnabled(True)
-            self.tempCheck.setEnabled(True)
+            # self.tempCheck.setEnabled(True)
         elif value == "OFF":
             self.sweepVoltageMin.setEnabled(False)
             self.sweepVoltageMax.setEnabled(False)
-            self.tempCheck.setEnabled(False)
+            # self.tempCheck.setEnabled(False)
 
 
 def main():

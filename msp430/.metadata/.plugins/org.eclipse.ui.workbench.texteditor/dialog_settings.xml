@@ -2,19 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="275" key="DIALOG_WIDTH"/>
-		<item value="332" key="DIALOG_Y_ORIGIN"/>
+		<item value="317" key="DIALOG_Y_ORIGIN"/>
+		<item value="815" key="DIALOG_X_ORIGIN"/>
 		<item value="371" key="DIALOG_HEIGHT"/>
-		<item value="806" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Sans|10.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="isRegEx"/>
 		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="ADC_SDO" key="selection"/>
+		<item value="g_rxBuffer" key="selection"/>
 		<list key="findhistory">
+			<item value="UCA0RXBUF"/>
 			<item value="ADC_SDO"/>
 			<item value="\"/>
 			<item value="READING"/>
@@ -22,9 +23,9 @@
 			<item value="DONEREA"/>
 			<item value="&quot;V&quot;"/>
 			<item value="ADC_BUSY"/>
-			<item value="ADC_"/>
 		</list>
 		<list key="replacehistory">
+			<item value="g_rxBuffer"/>
 			<item value="UCA1IFG"/>
 			<item value="UCA0TXBUF"/>
 			<item value="UCA0RXBUF"/>
@@ -32,7 +33,6 @@
 			<item value="DACPORT"/>
 			<item value="PORTDAC"/>
 			<item value="uartTxInt"/>
-			<item value="ADC_SDO"/>
 		</list>
 	</section>
 </section>

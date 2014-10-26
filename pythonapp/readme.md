@@ -1,12 +1,9 @@
 GENERAL OVERVIEW
 ================
 
+Curve Tracer Python Gui Application
 
-    DUT Voltage (-V to +V)
-    DUT Current (-V to +V)
-    Temp sensor (0-3.3V)
-    DAC output (0-4096)
-
+Purpose: Controls the MSP430 and interprets data to/from it
 
 
 USER OPTIONS
@@ -20,8 +17,7 @@ USER OPTIONS
         * when to start
         * when to end
         * voltage increment steps (1, 2, 3, 4.. 100% of Range)
-        * Temp data OPTION
-        * Live plot OPTION (may be really slow, better to log data then plot after)
+        * (If time allows) Live plot OPTION (may be really slow, better to log data then plot after)
 
 ## How does voltage sweep work
 ------------------------------
@@ -31,29 +27,28 @@ USER OPTIONS
 
 Other options:
     export data as .csv file
-    data initially stored in 3d array [I][V][T], will dump to CSV when ready
+    data initially stored in 2d array [I][V], will dump to CSV when ready
 
 ## CSV STYLE
 ------------
 
 Use python csv module (?)
 
-    VOLTAGE (mV), CURRENT (mA), Temperature (K)
-    x,x,x\n
-    x,x,x\n
-    x,x,x\n
-    x,x,x\n
+    VOLTAGE (mV), CURRENT (mA)
+    x,x\n
+    x,x\n
+    x,x\n
+    x,x\n
 
 
-# TODO (Don't ignore above notes btw)
--------------------------------------
+# TODO (Application still under development 10.25.14)
+-----------------------------------------------------
 
-Add pyplot stuff into application.
-    
-    Plot window space always shown? Or only during plot?
-    Real-time plotting?
+* Utilize signals & slots (New QT4 style)
+* Fix GUI lockup during thread object. (Not behaving like a separate thread...
 
-Use CX_FREEZE to test it under Windows. Nvm, Must be built under Windows also. Installed required libraries on Windows to build already
+
+* Use CX_FREEZE to test it under Windows. Nvm, Must be built under Windows also. Installed required libraries on Windows to build already
 
 ** ADD CURRENT LIMIT **
 

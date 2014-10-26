@@ -55,6 +55,7 @@ void shiftWordOut(unsigned int wordToShift, unsigned int mode);
 
 volatile unsigned int g_rxFlag = 0;
 volatile unsigned int g_adcValue = 0;
+volatile char g_rxBuffer = 0;
 
 // MAIN FUNCTION ----------------------------------- /
 int main(void) {
@@ -67,19 +68,19 @@ int main(void) {
 	volatile unsigned int i = 0;
 	while(1) {
 		if (g_rxFlag) {
-			if (UCA0RXBUF == '*') {			// * signifies end of cmd, do analysis
-				rxBuffer[i] = UCA0RXBUF;
+			if (g_rxBuffer == '*') {			// * signifies end of cmd, do analysis
+				rxBuffer[i] = g_rxBuffer;
 				analyze_cmd(rxBuffer);
 		    	memset(rxBuffer, 0, i);
 		    	i = 0;
 		    }
-			else if (UCA0RXBUF == 13) {		// compare to ascii {CR} d'13, 0x0D
+			else if (g_rxBuffer == 13) {		// compare to ascii {CR} d'13, 0x0D
 				analyze_cmd(rxBuffer);
 				memset(rxBuffer, 0, i);
 				i = 0;
 			}
 		    else {
-		    	rxBuffer[i] = UCA0RXBUF;
+		    	rxBuffer[i] = g_rxBuffer;
 		    	i++;
 		    }
 			g_rxFlag = 0;						// reset Rx Flag
@@ -94,6 +95,7 @@ int main(void) {
 __interrupt void UART_RX_ISR(void)
 {
 	LPM0_EXIT;							// exit LPM0
+	g_rxBuffer  = UCA0RXBUF;
 	g_rxFlag = 1;						// Set global RX flag
 }
 
