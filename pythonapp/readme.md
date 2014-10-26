@@ -7,10 +7,8 @@ Purpose: Controls the MSP430 and interprets data to/from it
 
 
 ## Features
------------
 
 ### Main Feature: Voltage Sweep
--------------------------------
 
     Options: 
 
@@ -20,7 +18,6 @@ Purpose: Controls the MSP430 and interprets data to/from it
         * (If time allows) Live plot OPTION (may be really slow, better to log data then plot after)
 
 ### How does voltage sweep work
--------------------------------
 
     Send DAC value (Get Vdut using this)
     Read ADC (Imonitor)
@@ -30,7 +27,6 @@ Other options:
     data initially stored in 2d array [I][V], will dump to CSV when ready
 
 ### CSV STYLE
--------------
 
 Use python csv module (?)
 
@@ -42,10 +38,8 @@ Use python csv module (?)
 
 
 ## DEVELOPMENT NOTES
---------------------
 
 ### TODO (Application still under development 10.25.14)
--------------------------------------------------------
 
 * (in progress) Utilize signals & slots (New QT4 style)
 * (done) Fix GUI lockup during thread object. (Not behaving like a separate thread...
@@ -56,7 +50,6 @@ Use python csv module (?)
 * **ADD CURRENT LIMIT **
 
 ### Changelog (Started 10.26.14)
---------------------------------
 
 * Fixed GUI lockup. Solution: Call thread object as self.thread
 * Added initial signal & slot work (Signals: when sweep starts, stopped, and updating voltage/current stats)
@@ -64,7 +57,6 @@ Use python csv module (?)
 
 
 ### COMMAND LIST
-----------------
 
 | COMMAND   | Description                                  |
 | --------- | -------------------------------------------- |
@@ -75,7 +67,7 @@ Use python csv module (?)
 
 
 ### ADC CONVERSION TABLE
-------------------------
+
 | ADC RAW       | Conversion           |
 | ------------- | -------------------- |
 | 0 -> 4095     | 0 -> +(Vcc\*2)       |
