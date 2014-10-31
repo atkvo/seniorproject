@@ -23,7 +23,7 @@ class SweepThread(QtCore.QThread):
         self.mutex = mutex
         self.minV = int(minV)
         self.maxV = int(maxV)
-        self.incrStep = round(4096*(int(incr)/100))  # 4096 * inc%
+        self.incrStep = round(4096*(float(incr)/100))  # 4096 * inc%
         self.mspInst = mspInstance
         self.numberOfDataPoints = round(4096/self.incrStep)
         self.voltageArray = array.array('f')

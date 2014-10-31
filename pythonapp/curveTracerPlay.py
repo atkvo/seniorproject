@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 import sys
-import curveTracerSerial as myserial
-import curveTracerProtocol as protocol
+# import curveTracerSerial as myserial
+# import curveTracerProtocol as protocol
 import time
 
-obj = myserial.CurveTracerSerial('/dev/ttyACM1', 9600)
+# obj = myserial.CurveTracerSerial('/dev/ttyACM1', 9600)
 
 
 # while True:
@@ -17,30 +17,30 @@ obj = myserial.CurveTracerSerial('/dev/ttyACM1', 9600)
 # 	print(response)
 
 
-def requestLoop(limit):
-    command = protocol.createPacket("VLT?")
-    obj.sendCommand(command)
-    response = obj.read()
-    # response = int(response)
-    print("response:", response)
-    time.sleep(.5)
-    # while response < limit:
-    # 	command = protocol.createPacket("VLT?")
-    # 	obj.sendCommand(command)
-    # 	response = obj.read()
-    # 	response = int(response)     # use int(response) to convert from ASCII to integer
-    # 	print("response and type: ", response, type(response))
+# def requestLoop(limit):
+#     command = protocol.createPacket("VLT?")
+#     obj.sendCommand(command)
+#     response = obj.read()
+#     # response = int(response)
+#     print("response:", response)
+#     time.sleep(.5)
+#     # while response < limit:
+#     # 	command = protocol.createPacket("VLT?")
+#     # 	obj.sendCommand(command)
+#     # 	response = obj.read()
+#     # 	response = int(response)     # use int(response) to convert from ASCII to integer
+#     # 	print("response and type: ", response, type(response))
 
-limit = input('Enter limit: ')	# use raw_input to get ASCII char
-while(True):
-    command = input('COMMAND: ')
-    protocol.createPacket(command)
-    # print("ECHO: ", command)
-    obj.sendCommand(command)
-    response = obj.read()
-    print("RESPONSE: ", response)
-obj.close()
-del obj
+# limit = input('Enter limit: ')	# use raw_input to get ASCII char
+# while(True):
+#     command = input('COMMAND: ')
+#     protocol.createPacket(command)
+#     # print("ECHO: ", command)
+#     obj.sendCommand(command)
+#     response = obj.read()
+#     print("RESPONSE: ", response)
+# obj.close()
+# del obj
 
 
 #CURVE TRACER PLOT PREVIOUS 

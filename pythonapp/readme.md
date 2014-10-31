@@ -44,7 +44,7 @@ Use python csv module (?)
 * (in progress) Utilize signals & slots (New QT4 style)
 * (done) Fix GUI lockup during thread object. (Not behaving like a separate thread...
 * Change sweep start to start at MINIMUM voltage (Need dual power supply to begin testing properly)
-* Add CSV output ability
+* (done) Add CSV output ability
 * Add premature sweep stop
 * Use CX_FREEZE to test it under Windows. Nvm, Must be built under Windows also. Installed required libraries on Windows to build already
 * **ADD CURRENT LIMIT **

@@ -8,6 +8,7 @@ Embedded pyplot?
 import sys
 import curveTracerSerial
 import curveTracerSweeper as cts
+import csv
 from PyQt4 import QtGui, QtCore
 
 
@@ -92,21 +93,26 @@ class MainWindow(QtGui.QWidget):
         self.btnSweepCommand.clicked.connect(self.sweepVoltageAction)
         self.btnSweepCommand.setFixedWidth(60)
 
+        self.btnExportLog = QtGui.QPushButton("Export")
+        self.btnExportLog.clicked.connect(self.btnExportLogAction)
+        self.btnExportLog.setFixedWidth(60)
+
         # self.tempCheck = QtGui.QCheckBox()
         # self.tempCheckLabel = QtGui.QLabel("Temperature?")
-        gridSweeper.addWidget(sweepVoltageMinLabel, 0, 0)
-        gridSweeper.addWidget(self.sweepVoltageMin, 0, 1)
-        gridSweeper.addWidget(sweepVoltageMaxLabel, 0, 2)
-        gridSweeper.addWidget(self.sweepVoltageMax, 0, 3)
+        gridSweeper.addWidget(sweepVoltageMaxLabel, 0, 0)
+        gridSweeper.addWidget(self.sweepVoltageMax, 0, 1)
+        gridSweeper.addWidget(sweepVoltageMinLabel, 1, 0)
+        gridSweeper.addWidget(self.sweepVoltageMin, 1, 1)
         gridSweeper.addWidget(sweepVoltageIncrLabel, 0, 4)
         gridSweeper.addWidget(self.sweepVoltageIncr, 0, 5)
         gridSweeper.addWidget(self.btnSweepCommand, 0, 6)
+        gridSweeper.addWidget(self.btnExportLog, 1, 6)
         # gridSweeper.addWidget(self.tempCheckLabel, 1, 1)
         # gridSweeper.addWidget(self.tempCheck, 1, 0, QtCore.Qt.AlignRight)
         self.groupSweeper.setLayout(gridSweeper)
 
         #### STATUS GROUP ###################################
-        self.groupStatus = QtGui.QGroupBox("Statuses")
+        self.groupStatus = QtGui.QGroupBox("Sweep Status")
         gridStatus = QtGui.QGridLayout()
 
         measuredVoltageLabel = QtGui.QLabel("Voltage [mV]")
@@ -181,12 +187,24 @@ class MainWindow(QtGui.QWidget):
             self.btnSweepCommand.setText("STOP")
             self.toggleSweepField("OFF")
         elif check is True:
-            voltageResults, currentResults = self.c.getResults()
-            print("voltage", voltageResults)
-            print("current", currentResults)
+            self.voltageResults, self.currentResults = self.c.getResults()
+            print("voltage", self.voltageResults)
+            print("current", self.currentResults)
             self.toggleSweepField("ON")
             self.btnSweepCommand.setText("SWEEP")
+            # enable export option here
         # self.connect()
+
+    def btnExportLogAction(self):
+        csvFile = QtGui.QFileDialog.getSaveFileName(self, 'Open file', '/home')
+        print(csvFile)
+        # f = open(csvFile)
+        # with open(f)
+        with open(csvFile, 'w', newline='') as fp:
+            a = csv.writer(fp, delimiter=',')
+            a.writerow(('VOLTAGE [mV]', 'CURRENT [mA]'))
+            for i in range(len(self.voltageResults)):
+                a.writerow((self.voltageResults[i], self.currentResults[i]))
 
     def updateStats(self, type, value):
         if type == "VOLTAGE":
