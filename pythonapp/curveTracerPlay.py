@@ -90,6 +90,7 @@ plt.ion()
 
 for i in range(1, arSize):
     xAxis[i] = xAxis[i-1] + .785
+
 plt.xticks(xAxis)
 
 for i in range(arSize):

@@ -2,6 +2,8 @@
 from PyQt4 import QtCore, QtGui
 import platform
 import array
+# from math import *
+# from numpy import *
 
 if platform.system() == "Windows":
     SLEEP_CMD = ['python', '-c', 'import time\ntime.sleep(5)']
@@ -39,11 +41,12 @@ class SweepThread(QtCore.QThread):
         print("Exited")
 
     def run(self):  # NOTE: NEVER call this function directly
-    # TODO: This therad is blocking the main GUI. Figure it out.
+        self.signalUpdateStats.emit("SIZE", self.numberOfDataPoints)
         self.signalSweepDone.emit(False)
         measuredVoltage = 0
         measuredCurrent = 0
         dacCommand = 0          # from 0 - 4095
+        # plt.ion()
         i = 0
         while measuredVoltage < self.maxV and i < self.numberOfDataPoints:
             dacCommand = dacCommand + self.incrStep
@@ -63,10 +66,11 @@ class SweepThread(QtCore.QThread):
             print("Measured current: ", measuredCurrent)
             self.signalUpdateStats.emit("CURRENT", measuredCurrent)
             self.currentArray.append(measuredCurrent)
-
+            # plt.plot(self.voltageArray[0:i], self.voltageArray[0:i])
+            # plt.draw()
             i = i + 1
         self.signalSweepDone.emit(True)
-        # When reading voltage, make sure to use int()
+        # When reading voltage, make sure to use int() or float()
         # to convert to integer to be able to do math
         # operations on it.
 
@@ -96,7 +100,7 @@ class SweepThread(QtCore.QThread):
 
     def stopSweep(self):
         print("Attempting to kill thread")
-        """ Should cleanly kill sweep on mutex unlock"""
+        # Should cleanly kill sweep on mutex unlock
 
     def convertRaw(self, rawValue, type):
         VCC = 5.47

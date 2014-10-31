@@ -9,6 +9,8 @@ import sys
 import curveTracerSerial
 import curveTracerSweeper as cts
 import csv
+import array
+import matplotlib.pyplot as plt
 from PyQt4 import QtGui, QtCore
 
 
@@ -187,13 +189,14 @@ class MainWindow(QtGui.QWidget):
             self.btnSweepCommand.setText("STOP")
             self.toggleSweepField("OFF")
         elif check is True:
-            self.voltageResults, self.currentResults = self.c.getResults()
-            print("voltage", self.voltageResults)
-            print("current", self.currentResults)
+            # self.voltageResults, self.currentResults = self.c.getResults()
+            # print("voltage", self.voltageResults)
+            # print("current", self.currentResults)
+            print("voltage", self.voltageArray)
+            print("current", self.currentArray)
             self.toggleSweepField("ON")
             self.btnSweepCommand.setText("SWEEP")
             # enable export option here
-        # self.connect()
 
     def btnExportLogAction(self):
         csvFile = QtGui.QFileDialog.getSaveFileName(self, 'Open file', '/home')
@@ -203,14 +206,31 @@ class MainWindow(QtGui.QWidget):
         with open(csvFile, 'w', newline='') as fp:
             a = csv.writer(fp, delimiter=',')
             a.writerow(('VOLTAGE [mV]', 'CURRENT [mA]'))
-            for i in range(len(self.voltageResults)):
-                a.writerow((self.voltageResults[i], self.currentResults[i]))
+            # for i in range(len(self.voltageResults)):
+            #     a.writerow((self.voltageResults[i], self.currentResults[i]))
+            for i in range(len(self.voltageArray)):
+                a.writerow((self.voltageArray[i], self.currentArray[i]))
 
     def updateStats(self, type, value):
         if type == "VOLTAGE":
             self.measuredVoltage.setText(str(value))
+            self.voltageArray.append(value)
         elif type == "CURRENT":
             self.measuredCurrent.setText(str(value))
+            self.currentArray.append(value)
+            for i in range(len(self.currentArray)):
+                plt.plot(self.voltageArray[0:i], self.voltageArray[0:i])
+                plt.draw()
+        elif type == "SIZE":
+            self.voltageArray = array.array('f')
+            self.currentArray = array.array('f')
+            try:
+                plt.close()
+            except:
+                print("Couldn't close plot")
+            plt.ion()
+            # arraySize = value
+            pass
 
     def mspSend(self):
         command = self.commandBox.text()
