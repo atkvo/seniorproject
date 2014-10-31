@@ -49,8 +49,16 @@ Use python csv module (?)
 * Use CX_FREEZE to test it under Windows. Nvm, Must be built under Windows also. Installed required libraries on Windows to build already
 * **ADD CURRENT LIMIT **
 
-### Changelog (Started 10.26.14)
+### Changelog
 
+#### 10.31.14
+* Added CVS logging/export
+* Added real-time plotting (should make this optional)
+* Added premature sweep stop (needs work, slow to respond sometimes)
+* Moved data logging from sweepthread to main application. Measured values relayed through signals/slots
+
+
+#### 10.26.14
 * Fixed GUI lockup. Solution: Call thread object as self.thread
 * Added initial signal & slot work (Signals: when sweep starts, stopped, and updating voltage/current stats)
  

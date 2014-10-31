@@ -21,7 +21,7 @@
 
 def createPacket(base):
     command = "!" + base + "*"
-    print(type(command))
+    # print(type(command))
     return command
 
 ## This function might be unnecessary. MSP430 already returns correct value

@@ -98,6 +98,7 @@ class MainWindow(QtGui.QWidget):
         self.btnExportLog = QtGui.QPushButton("Export")
         self.btnExportLog.clicked.connect(self.btnExportLogAction)
         self.btnExportLog.setFixedWidth(60)
+        self.btnExportLog.setEnabled(False)  # Cannot export log without a run
 
         # self.tempCheck = QtGui.QCheckBox()
         # self.tempCheckLabel = QtGui.QLabel("Temperature?")
@@ -195,6 +196,7 @@ class MainWindow(QtGui.QWidget):
             print("voltage", self.voltageArray)
             print("current", self.currentArray)
             self.toggleSweepField("ON")
+            self.btnExportLog.setEnabled(True)
             self.btnSweepCommand.setText("SWEEP")
             # enable export option here
 
@@ -212,11 +214,12 @@ class MainWindow(QtGui.QWidget):
                 a.writerow((self.voltageArray[i], self.currentArray[i]))
 
     def updateStats(self, type, value):
+        valueRounded = round(value, 4)
         if type == "VOLTAGE":
-            self.measuredVoltage.setText(str(value))
+            self.measuredVoltage.setText(str(valueRounded) + " mV")
             self.voltageArray.append(value)
         elif type == "CURRENT":
-            self.measuredCurrent.setText(str(value))
+            self.measuredCurrent.setText(str(valueRounded) + " mA")
             self.currentArray.append(value)
             for i in range(len(self.currentArray)):
                 plt.plot(self.voltageArray[0:i], self.voltageArray[0:i])

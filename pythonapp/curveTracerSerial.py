@@ -16,7 +16,7 @@ class Connection:
         to add the ! and * to the command
         """
         command = self.createPacket(command)
-        print("COMMAND: ", command)
+        # print("COMMAND: ", command)
         self.ser.write(command.encode())
         # print('encoded: ', command.encode())
 
@@ -24,7 +24,7 @@ class Connection:
         x = ""
         x = self.ser.read(50)
         # print(x)
-        print("Raw adc: ", x)
+        # print("Raw adc: ", x)
         return x
 
     def close(self):

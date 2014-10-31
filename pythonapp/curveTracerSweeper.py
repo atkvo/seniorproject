@@ -47,25 +47,28 @@ class SweepThread(QtCore.QThread):
         measuredCurrent = 0
         dacCommand = 0          # from 0 - 4095
         # plt.ion()
+        self.stop = False
         i = 0
-        while measuredVoltage < self.maxV and i < self.numberOfDataPoints:
+        while measuredVoltage < self.maxV \
+                and i < self.numberOfDataPoints \
+                and self.stop is False:
             dacCommand = dacCommand + self.incrStep
             self.sendVoltage(dacCommand)
             self.msleep(10)
             QtGui.qApp.processEvents()
             measuredVoltage = self.readVoltage()
             measuredVoltage = self.convertRaw(measuredVoltage, "VOLTAGE")
-            print("Measured voltage: ", measuredVoltage)
+            # print("Measured voltage: ", measuredVoltage)
             self.signalUpdateStats.emit("VOLTAGE", measuredVoltage)
-            self.voltageArray.append(measuredVoltage)
+            # self.voltageArray.append(measuredVoltage)
 
             self.msleep(10)
             QtGui.qApp.processEvents()
             measuredCurrent = self.readCurrent()
             measuredCurrent = self.convertRaw(measuredCurrent, "VOLTAGE")
-            print("Measured current: ", measuredCurrent)
+            # print("Measured current: ", measuredCurrent)
             self.signalUpdateStats.emit("CURRENT", measuredCurrent)
-            self.currentArray.append(measuredCurrent)
+            # self.currentArray.append(measuredCurrent)
             # plt.plot(self.voltageArray[0:i], self.voltageArray[0:i])
             # plt.draw()
             i = i + 1
@@ -100,6 +103,7 @@ class SweepThread(QtCore.QThread):
 
     def stopSweep(self):
         print("Attempting to kill thread")
+        self.stop = True
         # Should cleanly kill sweep on mutex unlock
 
     def convertRaw(self, rawValue, type):
