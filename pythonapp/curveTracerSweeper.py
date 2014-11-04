@@ -30,6 +30,7 @@ class SweepThread(QtCore.QThread):
         self.numberOfDataPoints = round(4096/self.incrStep)
         self.voltageArray = array.array('f')
         self.currentArray = array.array('f')
+        self.dacSupply = 3300  # 3.3V supply for DAC
         print("incr step is: ", self.incrStep)
         print("number of data points: ", self.numberOfDataPoints)
 
@@ -45,7 +46,8 @@ class SweepThread(QtCore.QThread):
         self.signalSweepDone.emit(False)
         measuredVoltage = 0
         measuredCurrent = 0
-        dacCommand = 0          # from 0 - 4095
+        # dacCommand = 0          # from 0 - 4095
+        dacCommand = self.a2d(self.minV)
         # plt.ion()
         self.stop = False
         i = 0
@@ -77,6 +79,17 @@ class SweepThread(QtCore.QThread):
         # to convert to integer to be able to do math
         # operations on it.
 
+    def a2d(self, desiredVoltage):
+        """ Convert the desiredVoltage to a digital value for the adc
+            Will be used to get the STARTING voltage from minV
+            Voltage unit: mV
+            Equation: Y(+-Out) = 1.987(X_a) - 3.3
+            X_a = analog voltage = (Y+3.3)/1.987
+            X_d = digital conversion = (3.3)/(4096*X_a)"""
+        voltA = float((desiredVoltage + self.dacSupply)/1.987)
+        voltD = round((4096*voltA)/self.dacSupply)
+        return voltD
+
     def readVoltage(self):
         self.mspInst.sendCommand("V?")
         self.mspInst.read()
@@ -107,7 +120,8 @@ class SweepThread(QtCore.QThread):
         # Should cleanly kill sweep on mutex unlock
 
     def convertRaw(self, rawValue, type):
-        VCC = 5.47
+        # VCC = 5.47
+        VCC = 4.98  # terms of Volts
         """ Convert raw adc voltage to real voltage"""
         rawValue = int(rawValue)
         ratio = 0
