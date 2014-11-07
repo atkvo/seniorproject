@@ -11,6 +11,7 @@ import curveTracerSweeper as cts
 import csv
 import array
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigCanvas
 from PyQt4 import QtGui, QtCore
 
 
@@ -190,26 +191,18 @@ class MainWindow(QtGui.QWidget):
             self.btnSweepCommand.setText("STOP")
             self.toggleSweepField("OFF")
         elif check is True:
-            # self.voltageResults, self.currentResults = self.c.getResults()
-            # print("voltage", self.voltageResults)
-            # print("current", self.currentResults)
             print("voltage", self.voltageArray)
             print("current", self.currentArray)
             self.toggleSweepField("ON")
             self.btnExportLog.setEnabled(True)
             self.btnSweepCommand.setText("SWEEP")
-            # enable export option here
 
     def btnExportLogAction(self):
-        csvFile = QtGui.QFileDialog.getSaveFileName(self, 'Open file', '/home')
+        csvFile = QtGui.QFileDialog.getSaveFileName(self, 'Open file', '.')
         print(csvFile)
-        # f = open(csvFile)
-        # with open(f)
         with open(csvFile, 'w', newline='') as fp:
             a = csv.writer(fp, delimiter=',')
             a.writerow(('VOLTAGE [mV]', 'CURRENT [mA]'))
-            # for i in range(len(self.voltageResults)):
-            #     a.writerow((self.voltageResults[i], self.currentResults[i]))
             for i in range(len(self.voltageArray)):
                 a.writerow((self.voltageArray[i], self.currentArray[i]))
 
@@ -222,18 +215,19 @@ class MainWindow(QtGui.QWidget):
             self.measuredCurrent.setText(str(valueRounded) + " mA")
             self.currentArray.append(value)
             for i in range(len(self.currentArray)):
-                plt.plot(self.voltageArray[0:i], self.voltageArray[0:i])
-                plt.draw()
+                ax = self.figure.add_subplot(111)
+                ax.hold(False)
+                ax.plot(self.voltageArray[0:i], self.voltageArray[0:i])
+                ax.set_title('SOLAR CELL IV CURVE')
+                ax.set_xlabel('VOLTAGE [mV]')
+                ax.set_ylabel('CURRENT [mA]')
+                self.canvas.draw()
         elif type == "SIZE":
             self.voltageArray = array.array('f')
             self.currentArray = array.array('f')
-            try:
-                plt.close()
-            except:
-                print("Couldn't close plot")
-            plt.ion()
-            # arraySize = value
-            pass
+            self.figure = plt.figure()
+            self.canvas = FigCanvas(self.figure)
+            self.canvas.show()
 
     def mspSend(self):
         command = self.commandBox.text()
@@ -264,11 +258,9 @@ class MainWindow(QtGui.QWidget):
         if value == "ON":
             self.sweepVoltageMin.setEnabled(True)
             self.sweepVoltageMax.setEnabled(True)
-            # self.tempCheck.setEnabled(True)
         elif value == "OFF":
             self.sweepVoltageMin.setEnabled(False)
             self.sweepVoltageMax.setEnabled(False)
-            # self.tempCheck.setEnabled(False)
 
 
 def main():

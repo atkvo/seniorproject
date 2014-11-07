@@ -1,18 +1,9 @@
 #!/usr/bin/env python3
 from PyQt4 import QtCore, QtGui
-import platform
 import array
-# from math import *
-# from numpy import *
-
-if platform.system() == "Windows":
-    SLEEP_CMD = ['python', '-c', 'import time\ntime.sleep(5)']
-else:
-    SLEEP_CMD = ['sleep', '5']
 
 
 class SweepThread(QtCore.QThread):
-# class SweeperThread(QtCore.QObject):
 
     signalSweepDone = QtCore.pyqtSignal(bool)
     signalUpdateStats = QtCore.pyqtSignal(str, float)
@@ -30,14 +21,11 @@ class SweepThread(QtCore.QThread):
         self.numberOfDataPoints = round(4096/self.incrStep)
         self.voltageArray = array.array('f')
         self.currentArray = array.array('f')
-        self.dacSupply = 3300  # 3.3V supply for DAC
         print("incr step is: ", self.incrStep)
         print("number of data points: ", self.numberOfDataPoints)
 
     def __del__(self):
         self.exiting = True
-        # self.wait()
-        # self.emit.finished("DONE")
         self.signalSweepDone.emit(True)
         print("Exited")
 
@@ -54,15 +42,14 @@ class SweepThread(QtCore.QThread):
         while measuredVoltage < self.maxV \
                 and i < self.numberOfDataPoints \
                 and self.stop is False:
-            dacCommand = dacCommand + self.incrStep
             self.sendVoltage(dacCommand)
             self.msleep(10)
             QtGui.qApp.processEvents()
             measuredVoltage = self.readVoltage()
+            print("RAW VOLTAGE: ", measuredVoltage)
             measuredVoltage = self.convertRaw(measuredVoltage, "VOLTAGE")
             # print("Measured voltage: ", measuredVoltage)
             self.signalUpdateStats.emit("VOLTAGE", measuredVoltage)
-            # self.voltageArray.append(measuredVoltage)
 
             self.msleep(10)
             QtGui.qApp.processEvents()
@@ -70,10 +57,8 @@ class SweepThread(QtCore.QThread):
             measuredCurrent = self.convertRaw(measuredCurrent, "VOLTAGE")
             # print("Measured current: ", measuredCurrent)
             self.signalUpdateStats.emit("CURRENT", measuredCurrent)
-            # self.currentArray.append(measuredCurrent)
-            # plt.plot(self.voltageArray[0:i], self.voltageArray[0:i])
-            # plt.draw()
             i = i + 1
+            dacCommand = dacCommand + self.incrStep
         self.signalSweepDone.emit(True)
         # When reading voltage, make sure to use int() or float()
         # to convert to integer to be able to do math
@@ -83,11 +68,15 @@ class SweepThread(QtCore.QThread):
         """ Convert the desiredVoltage to a digital value for the adc
             Will be used to get the STARTING voltage from minV
             Voltage unit: mV
-            Equation: Y(+-Out) = 1.987(X_a) - 3.3
-            X_a = analog voltage = (Y+3.3)/1.987
+            Equation: Y(+-Out) [mV] = 1.987(X_a) - 3.3
+            X_a = analog voltage = (Y+3.3)/1.987 (if Vsupply = 3.3V)
             X_d = digital conversion = (3.3)/(4096*X_a)"""
-        voltA = float((desiredVoltage + self.dacSupply)/1.987)
-        voltD = round((4096*voltA)/self.dacSupply)
+        # dacSupply = 3300  # 3.3V supply for DAC
+        dacSupply = 3600  # 3.6V supply for DAC
+        # voltA = float((desiredVoltage + dacSupply)/1.987)  # DAC 3.3V ideal
+        voltA = float((desiredVoltage + dacSupply)/1.999)  # DAC 3.6V test
+        voltD = round((4096*voltA)/dacSupply)
+        print("ANALOG: ", desiredVoltage, "DIGITAL: ", voltD)
         return voltD
 
     def readVoltage(self):
@@ -123,8 +112,8 @@ class SweepThread(QtCore.QThread):
         # Should cleanly kill sweep on mutex unlock
 
     def convertRaw(self, rawValue, type):
-        # VCC = 5.47
-        VCC = 4.98  # terms of Volts
+        VCC = 5.47  # terms of Volts
+        # VCC = 4.98  # terms of Volts
         """ Convert raw adc voltage to real voltage"""
         rawValue = int(rawValue)
         ratio = 0
