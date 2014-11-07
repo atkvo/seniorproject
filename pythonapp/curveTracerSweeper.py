@@ -103,6 +103,9 @@ class SweepThread(QtCore.QThread):
         return(self.mspInst.read())
 
     def sendVoltage(self, raw):
+        """This function will prepend 0's to raw.
+            helps keep the format XXXX if value is smaller
+            than 4 digits"""
         command = "V="
         digits = len(str(raw))
         zeroes = 4 - digits
