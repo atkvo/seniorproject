@@ -8,8 +8,6 @@ class SweepThread(QtCore.QThread):
     signalUpdateStats = QtCore.pyqtSignal(str, float)
 
     def __init__(self, mutex, mspInstance, minV, maxV, incr):
-    # def __init__(self, minV, maxV, incr):
-    # Should also take sweep increment % also
         super(SweepThread, self).__init__()
         self.exiting = False
         self.mutex = mutex

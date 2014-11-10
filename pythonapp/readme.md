@@ -53,6 +53,11 @@ Use python csv module (?)
 
 
 ### Changelog
+#### 11.09.14 09:00 PM
+* Added current conversion to curveTracerSweeper
+* Cleaned up code (removed obsolete comments)
+* Changed constant variables to all CAPS to easily distinguish them
+
 #### 11.07.14 12:06 AM
 * Fixed plot lockup (use PYQT4 backend from matplotlib)
 * Added plot axis labels and title
