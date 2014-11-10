@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 from PyQt4 import QtCore, QtGui
-import array
 
 
 class SweepThread(QtCore.QThread):
@@ -16,11 +15,9 @@ class SweepThread(QtCore.QThread):
         self.mutex = mutex
         self.minV = int(minV)
         self.maxV = int(maxV)
-        self.incrStep = round(4096*(float(incr)/100))  # 4096 * inc%
+        self.incrStep = round(4096*(float(incr)/100))  # 4096 * incr%
         self.mspInst = mspInstance
         self.numberOfDataPoints = round(4096/self.incrStep)
-        self.voltageArray = array.array('f')
-        self.currentArray = array.array('f')
         print("incr step is: ", self.incrStep)
         print("number of data points: ", self.numberOfDataPoints)
 
@@ -29,14 +26,12 @@ class SweepThread(QtCore.QThread):
         self.signalSweepDone.emit(True)
         print("Exited")
 
-    def run(self):  # NOTE: NEVER call this function directly
+    def run(self):  # NOTE: NEVER call this function directly, use start()
         self.signalUpdateStats.emit("SIZE", self.numberOfDataPoints)
         self.signalSweepDone.emit(False)
         measuredVoltage = 0
         measuredCurrent = 0
-        # dacCommand = 0          # from 0 - 4095
         dacCommand = self.a2d(self.minV)
-        # plt.ion()
         self.stop = False
         i = 0
         while measuredVoltage < self.maxV \
@@ -54,7 +49,7 @@ class SweepThread(QtCore.QThread):
             self.msleep(10)
             QtGui.qApp.processEvents()
             measuredCurrent = self.readCurrent()
-            measuredCurrent = self.convertRaw(measuredCurrent, "VOLTAGE")
+            measuredCurrent = self.convertRaw(measuredCurrent, "CURRENT")
             # print("Measured current: ", measuredCurrent)
             self.signalUpdateStats.emit("CURRENT", measuredCurrent)
             i = i + 1
@@ -71,13 +66,12 @@ class SweepThread(QtCore.QThread):
             Equation: Y(+-Out) [mV] = 1.987(X_a) - 3.3
             X_a = analog voltage = (Y+3.3)/1.987 (if Vsupply = 3.3V)
             X_d = digital conversion = (3.3)/(4096*X_a)"""
-        # dacSupply = 3300  # 3.3V supply for DAC
-        dacSupply = 3600  # 3.6V supply for DAC
-        # voltA = float((desiredVoltage + dacSupply)/1.987)  # DAC 3.3V ideal
-        voltA = float((desiredVoltage + dacSupply)/1.999)  # DAC 3.6V test
-        voltD = round((4096*voltA)/dacSupply)
-        print("ANALOG: ", desiredVoltage, "DIGITAL: ", voltD)
-        return voltD
+        DAC_SUPPLY = 3600  # 3.6V supply for DAC
+        #vAnalog = float((desiredVoltage + DAC_SUPPLY)/1.987)  # DAC 3.3V ideal
+        vAnalog = float((desiredVoltage + DAC_SUPPLY)/1.999)  # DAC 3.6V test
+        vDigital = round((4096*vAnalog)/DAC_SUPPLY)
+        print("ANALOG: ", desiredVoltage, "DIGITAL: ", vDigital)
+        return vDigital
 
     def readVoltage(self):
         self.mspInst.sendCommand("V?")
@@ -113,24 +107,25 @@ class SweepThread(QtCore.QThread):
 
     def convertRaw(self, rawValue, type):
         VCC = 5.47  # terms of Volts
-        # VCC = 4.98  # terms of Volts
+        ADC_FULLSCALE = 2000*VCC  # 2000 milli * VCC
         """ Convert raw adc voltage to real voltage"""
         rawValue = int(rawValue)
         ratio = 0
-        if type == "VOLTAGE":
-            if rawValue < 4096:
-                # positive voltage (0-10V)
-                ratio = int(rawValue)/4096
-                # voltage = ratio * 10
-                voltage = ratio * VCC*2000     # get voltage in terms of mV
-            elif rawValue >= 4096:
-                rawValue = 8192 - rawValue
-                # convert scaling (0->0V, 4096-> -10V)
-                # be sure to multiply final value by (-1)
-                ratio = int(rawValue)/4096
-                # voltage = -1 * (ratio * 10)
-                voltage = -1 * (ratio * VCC*2000)
-            return voltage
+        if rawValue < 4096:
+            # positive voltage (0-10V)
+            ratio = int(rawValue)/4096
+            # voltage = ratio * 10
+            voltage = ratio * ADC_FULLSCALE  # get voltage in terms of mV
+        elif rawValue >= 4096:
+            rawValue = 8192 - rawValue
+            # convert scaling (0->0V, 4096-> -10V)
+            # be sure to multiply final value by (-1)
+            ratio = int(rawValue)/4096
+            voltage = -1 * (ratio * ADC_FULLSCALE)
 
-    def getResults(self):
-        return self.voltageArray, self.currentArray
+        if type == "VOLTAGE":
+            return voltage  # returns voltage in mV
+        elif type == "CURRENT":
+            # C:V ratio is 1:-1
+            current = -1 * voltage
+            return current  # returns current in mA
