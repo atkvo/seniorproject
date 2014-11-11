@@ -39,16 +39,14 @@ class SweepThread(QtCore.QThread):
             self.msleep(10)
             QtGui.qApp.processEvents()
             measuredVoltage = self.readVoltage()
-            print("RAW VOLTAGE: ", measuredVoltage)
+            print("VOLTAGE1: ", measuredVoltage)
             measuredVoltage = self.convertRaw(measuredVoltage, "VOLTAGE")
-            # print("Measured voltage: ", measuredVoltage)
             self.signalUpdateStats.emit("VOLTAGE", measuredVoltage)
 
             self.msleep(10)
             QtGui.qApp.processEvents()
             measuredCurrent = self.readCurrent()
             measuredCurrent = self.convertRaw(measuredCurrent, "CURRENT")
-            # print("Measured current: ", measuredCurrent)
             self.signalUpdateStats.emit("CURRENT", measuredCurrent)
             i = i + 1
             dacCommand = dacCommand + self.incrStep

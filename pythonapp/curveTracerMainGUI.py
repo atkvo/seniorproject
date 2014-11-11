@@ -217,7 +217,7 @@ class MainWindow(QtGui.QWidget):
             for i in range(len(self.currentArray)):
                 ax = self.figure.add_subplot(111)
                 ax.hold(False)
-                ax.plot(self.voltageArray[0:i], self.voltageArray[0:i])
+                ax.plot(self.voltageArray[0:i], self.currentArray[0:i])
                 ax.set_title('SOLAR CELL IV CURVE')
                 ax.set_xlabel('VOLTAGE [mV]')
                 ax.set_ylabel('CURRENT [mA]')
