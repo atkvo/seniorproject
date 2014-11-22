@@ -48,11 +48,20 @@ Use python csv module (?)
 * (done) Add CSV output ability
 * (done) Add premature sweep stop
 * (done) Fix Pyplot lockup
-* **ADD CURRENT LIMIT **
+* Add user-settable averaging (how many samples per point)
 * Use CX_FREEZE to test it under Windows. Nvm, Must be built under Windows also. Installed required libraries on Windows to build already
 
 
 ### Changelog
+#### 11.22.14 01:40 PM
+* Added averaging for voltage and current measurements
+    * TODO: user-settable averaging
+* Added another "stop check" for sweeping loop
+    * if dacCmd > 4095, end sweep
+
+#### 11.10.14 05:00 PM
+* Fixed plot. From (voltage, voltage) to (current, current)
+
 #### 11.09.14 09:00 PM
 * Added current conversion to curveTracerSweeper
 * Cleaned up code (removed obsolete comments)

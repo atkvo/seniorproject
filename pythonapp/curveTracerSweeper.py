@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from PyQt4 import QtCore, QtGui
+import array
 
 
 class SweepThread(QtCore.QThread):
@@ -29,23 +30,43 @@ class SweepThread(QtCore.QThread):
         self.signalSweepDone.emit(False)
         measuredVoltage = 0
         measuredCurrent = 0
+        currentArray = array.array('f')
+        voltageArray = array.array('f')
         dacCommand = self.a2d(self.minV)
         self.stop = False
         i = 0
         while measuredVoltage < self.maxV \
                 and i < self.numberOfDataPoints \
-                and self.stop is False:
+                and self.stop is False \
+                and dacCommand < 4096:
+            measuredVoltage = 0
+            measuredCurrent = 0
             self.sendVoltage(dacCommand)
             self.msleep(10)
             QtGui.qApp.processEvents()
-            measuredVoltage = self.readVoltage()
+            # measuredVoltage = self.readVoltage()
+            for n in range(4):
+                # find outlier here
+                voltageArray.insert(n, int(self.readVoltage()))
+                print("READV: ", voltageArray[n])
+                measuredVoltage = int(voltageArray[n]) + measuredVoltage
+                self.msleep(10)
+            measuredVoltage = measuredVoltage/4
             print("VOLTAGE1: ", measuredVoltage)
             measuredVoltage = self.convertRaw(measuredVoltage, "VOLTAGE")
             self.signalUpdateStats.emit("VOLTAGE", measuredVoltage)
 
             self.msleep(10)
             QtGui.qApp.processEvents()
-            measuredCurrent = self.readCurrent()
+            # measuredCurrent = self.readCurrent()
+            for n in range(4):
+                # find outlier here
+                currentArray.insert(n, int(self.readCurrent()))
+                print("READC: ", currentArray[n])
+                measuredCurrent = int(currentArray[n]) + measuredCurrent
+                self.msleep(10)
+            measuredCurrent = measuredCurrent/4
+            print("measuredCurrent: ", measuredCurrent)
             measuredCurrent = self.convertRaw(measuredCurrent, "CURRENT")
             self.signalUpdateStats.emit("CURRENT", measuredCurrent)
             i = i + 1
@@ -62,7 +83,7 @@ class SweepThread(QtCore.QThread):
             Equation: Y(+-Out) [mV] = 1.987(X_a) - 3.3
             X_a = analog voltage = (Y+3.3)/1.987 (if Vsupply = 3.3V)
             X_d = digital conversion = (3.3)/(4096*X_a)"""
-        DAC_SUPPLY = 3600  # 3.6V supply for DAC
+        DAC_SUPPLY = 3300  # 3.6V supply for DAC
         #vAnalog = float((desiredVoltage + DAC_SUPPLY)/1.987)  # DAC 3.3V ideal
         vAnalog = float((desiredVoltage + DAC_SUPPLY)/1.999)  # DAC 3.6V test
         vDigital = round((4096*vAnalog)/DAC_SUPPLY)
