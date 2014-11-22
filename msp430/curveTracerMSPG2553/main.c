@@ -41,10 +41,12 @@ void shiftWordOut(unsigned int wordToShift, unsigned int mode);
 #define ADC_CONVST	BIT0		// CONVST (Start ADC conversion. Active High)
 #define ADC_SDO 	BIT3		// SDO (ADC converted data 16-bit (2LSB Don't care)
 #define ADC_BUSY 	BIT4		// If LOW, then ADC is busy
-#define PORT_ADC 	P2OUT		// ADC PORT: P6.X
+#define PORT_ADC 	P2OUT		// ADC PORT: P2.X
 
-#define ADC_CH0 	0x8000		// MUX CTRL: 0b1000 ---- ---- ----
+//#define ADC_CH0 	0x8000		// MUX CTRL: 0b1000 ---- ---- ----
+#define ADC_CH0 	0x0000		// MUX CTRL: 0b0000 ---- ---- ---- (Differential mode)
 #define ADC_CH2 	0x9000     	// MUX CTRL: 0b1001 ---- ---- ----
+//#define ADC_CH2 	0x1000     	// MUX CTRL: 0b0001 ---- ---- ---- (Differential mode)
 #define ADC_CH4 	0xA000		// MUX CTRL: 0b1010 ---- ---- ----
 
 #define ADC_ON		0x0000		// PWR CTRL: 0b---- --00 ---- ----
@@ -280,6 +282,7 @@ void adcSend(unsigned int channel, unsigned int power) {
 		command = command + ADC_ON;
 	}
 	shiftWordOut(command, MODE_ADC);
+//	shiftWordOut(command, MODE_ADC);	// twice, 1 send, 1 receives
 }
 
 void adcRead(unsigned int channel) {

@@ -17,3 +17,10 @@ Advisor:
 # General Overview
 
 ** To be updated **
+
+# CHANGELOG 
+
+## 11.22.14 1:40PM
+* Changed ADC modes
+    * CH0 changed from Single ended mode to Differential mode
+
