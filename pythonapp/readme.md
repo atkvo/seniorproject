@@ -53,6 +53,9 @@ Use python csv module (?)
 
 
 ### Changelog
+#### 11.28.14 10:30 PM
+* Added user-settable sample rate (samples per voltage step)
+
 #### 11.22.14 01:40 PM
 * Added averaging for voltage and current measurements
     * TODO: user-settable averaging

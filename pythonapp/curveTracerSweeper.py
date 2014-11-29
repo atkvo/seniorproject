@@ -8,7 +8,7 @@ class SweepThread(QtCore.QThread):
     signalSweepDone = QtCore.pyqtSignal(bool)
     signalUpdateStats = QtCore.pyqtSignal(str, float)
 
-    def __init__(self, mutex, mspInstance, minV, maxV, incr):
+    def __init__(self, mutex, mspInstance, minV, maxV, incr, sampleRate):
         super(SweepThread, self).__init__()
         self.exiting = False
         self.mutex = mutex
@@ -16,6 +16,7 @@ class SweepThread(QtCore.QThread):
         self.maxV = int(maxV)
         self.incrStep = round(4096*(float(incr)/100))  # 4096 * incr%
         self.mspInst = mspInstance
+        self.sampleRate = int(sampleRate)
         self.numberOfDataPoints = round(4096/self.incrStep)
         print("incr step is: ", self.incrStep)
         print("number of data points: ", self.numberOfDataPoints)
@@ -45,30 +46,30 @@ class SweepThread(QtCore.QThread):
             self.msleep(10)
             QtGui.qApp.processEvents()
             # measuredVoltage = self.readVoltage()
-            for n in range(4):
-                # find outlier here
+            for n in range(self.sampleRate):
                 voltageArray.insert(n, int(self.readVoltage()))
                 print("READV: ", voltageArray[n])
                 measuredVoltage = int(voltageArray[n]) + measuredVoltage
                 self.msleep(10)
-            measuredVoltage = measuredVoltage/4
-            print("VOLTAGE1: ", measuredVoltage)
+            measuredVoltage = measuredVoltage/(self.sampleRate)
             measuredVoltage = self.convertRaw(measuredVoltage, "VOLTAGE")
             self.signalUpdateStats.emit("VOLTAGE", measuredVoltage)
 
             self.msleep(10)
             QtGui.qApp.processEvents()
             # measuredCurrent = self.readCurrent()
-            for n in range(4):
-                # find outlier here
+            for n in range(self.sampleRate):
                 currentArray.insert(n, int(self.readCurrent()))
                 print("READC: ", currentArray[n])
                 measuredCurrent = int(currentArray[n]) + measuredCurrent
                 self.msleep(10)
-            measuredCurrent = measuredCurrent/4
-            print("measuredCurrent: ", measuredCurrent)
+            measuredCurrent = measuredCurrent/(self.sampleRate)
             measuredCurrent = self.convertRaw(measuredCurrent, "CURRENT")
             self.signalUpdateStats.emit("CURRENT", measuredCurrent)
+
+            print("VOLTAGE1: ", measuredVoltage)
+            print("measuredCurrent: ", measuredCurrent, "\n\n")
+
             i = i + 1
             dacCommand = dacCommand + self.incrStep
         self.signalSweepDone.emit(True)
@@ -139,10 +140,10 @@ class SweepThread(QtCore.QThread):
             # be sure to multiply final value by (-1)
             ratio = int(rawValue)/4096
             voltage = -1 * (ratio * ADC_FULLSCALE)
-
         if type == "VOLTAGE":
             return voltage  # returns voltage in mV
         elif type == "CURRENT":
             # C:V ratio is 1:-1
+            print("converted voltage: ", voltage)
             current = -1 * voltage
             return current  # returns current in mA

@@ -55,9 +55,7 @@ class MainWindow(QtGui.QWidget):
         gridConnect.addWidget(self.mspConfigPortBox, 0, 0)
         gridConnect.addWidget(self.mspConfigBaudBox, 0, 1)
         gridConnect.addWidget(self.btnMspConnect, 0, 2)
-        ############################################
-        # gridConnect.addWidget(btnTest, 0, 3)
-        ############################################
+
         self.mspConnectGroup.setLayout(gridConnect)
 
         #### CURVE TRACE APP COMMANDS ######################
@@ -84,17 +82,19 @@ class MainWindow(QtGui.QWidget):
         self.sweepVoltageMax.setText("1000")
         self.sweepVoltageMax.setMinimumWidth(50)
 
-        # self.sweepVoltageMax.setFixedWidth(50)
-
         sweepVoltageIncrLabel = QtGui.QLabel("Increment %")
         self.sweepVoltageIncr = QtGui.QLineEdit(self)
         self.sweepVoltageIncr.setText("5")
-        # self.sweepVoltageIncr.setFixedWidth(40)
         self.sweepVoltageIncr.setMinimumWidth(40)
 
         self.btnSweepCommand = QtGui.QPushButton("SWEEP")
         self.btnSweepCommand.clicked.connect(self.sweepVoltageAction)
         self.btnSweepCommand.setFixedWidth(60)
+
+        self.sweepSampleRateLabel = QtGui.QLabel("Sample Rate (x_)")
+        self.sweepSampleRate = QtGui.QLineEdit(self)
+        self.sweepSampleRate.setText("2")
+        self.sweepSampleRate.setFixedWidth(60)
 
         self.btnExportLog = QtGui.QPushButton("Export")
         self.btnExportLog.clicked.connect(self.btnExportLogAction)
@@ -110,9 +110,9 @@ class MainWindow(QtGui.QWidget):
         gridSweeper.addWidget(sweepVoltageIncrLabel, 0, 4)
         gridSweeper.addWidget(self.sweepVoltageIncr, 0, 5)
         gridSweeper.addWidget(self.btnSweepCommand, 0, 6)
+        gridSweeper.addWidget(self.sweepSampleRateLabel, 1, 4)
+        gridSweeper.addWidget(self.sweepSampleRate, 1, 5)
         gridSweeper.addWidget(self.btnExportLog, 1, 6)
-        # gridSweeper.addWidget(self.tempCheckLabel, 1, 1)
-        # gridSweeper.addWidget(self.tempCheck, 1, 0, QtCore.Qt.AlignRight)
         self.groupSweeper.setLayout(gridSweeper)
 
         #### STATUS GROUP ###################################
@@ -169,9 +169,10 @@ class MainWindow(QtGui.QWidget):
             maxV = self.sweepVoltageMax.text()
             minV = self.sweepVoltageMin.text()
             incr = self.sweepVoltageIncr.text()
+            sampleRate = self.sweepSampleRate.text()
             try:
                 self.c = cts.SweepThread(self.mutex, self.mspInst,
-                                         minV, maxV, incr)
+                                         minV, maxV, incr, sampleRate)
                 self.c.signalSweepDone.connect(self.sweepDoneAction)
                 self.c.signalUpdateStats.connect(self.updateStats)
                 self.c.begin()
