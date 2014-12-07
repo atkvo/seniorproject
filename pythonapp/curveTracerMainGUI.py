@@ -176,9 +176,11 @@ class MainWindow(QtGui.QWidget):
             minV = self.sweepVoltageMin.text()
             incr = self.sweepVoltageIncr.text()
             sampleRate = self.sweepSampleRate.text()
+            vccVoltage = self.vccVoltage.text()
             try:
                 self.c = cts.SweepThread(self.mutex, self.mspInst,
-                                         minV, maxV, incr, sampleRate)
+                                         minV, maxV, incr, sampleRate,
+                                         vccVoltage)
                 self.c.signalSweepDone.connect(self.sweepDoneAction)
                 self.c.signalUpdateStats.connect(self.updateStats)
                 self.c.begin()

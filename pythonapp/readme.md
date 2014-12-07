@@ -53,6 +53,9 @@ Use python csv module (?)
 
 
 ### Changelog
+#### 12.06.14 06:00 PM
+* Added adjustable 5V Calibration for ADC 
+
 #### 11.28.14 10:30 PM
 * Added user-settable sample rate (samples per voltage step)
 
