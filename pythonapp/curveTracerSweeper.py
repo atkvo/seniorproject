@@ -10,6 +10,7 @@ class SweepThread(QtCore.QThread):
 
     def __init__(self, mutex, mspInstance, minV, maxV, incr, sampleRate, vcc):
         super(SweepThread, self).__init__()
+        self.VCC3 = 3300
         self.exiting = False
         self.mutex = mutex
         self.minV = int(minV)
@@ -97,7 +98,7 @@ class SweepThread(QtCore.QThread):
                 =  ----------   |
                     Vsupply     | Vsupply = 3300mV
             """
-        DAC_SUPPLY = 3300  # 3.3V supply for DAC
+        DAC_SUPPLY = self.VCC3
         vAnalog = float((desiredVoltage + DAC_SUPPLY)/1.987)  # DAC 3.3V ideal
         vDigital = round((4096*vAnalog)/DAC_SUPPLY)
         # print("ANALOG: ", desiredVoltage, "DIGITAL: ", vDigital)
@@ -115,8 +116,8 @@ class SweepThread(QtCore.QThread):
             digitalStep =   -------------------------------
                                     1.987 * 3300 mV
         """
-        digitalStep = (desiredStepSize + 3300)*4096
-        digitalStep = round(digitalStep/(1.987*3300))
+        digitalStep = (desiredStepSize + self.VCC3)*4096
+        digitalStep = round(digitalStep/(1.987*self.VCC3))
         print("increment size (digital)", digitalStep)
         return digitalStep
 
