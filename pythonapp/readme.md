@@ -55,6 +55,8 @@ Use python csv module (?)
 ### Changelog
 #### 12.06.14 06:00 PM
 * Added adjustable 5V Calibration for ADC 
+* Change increment % -> Step size (mV)
+    * Added functions to support user adjustable sweep steps in mV rather than % of full range
 
 #### 11.28.14 10:30 PM
 * Added user-settable sample rate (samples per voltage step)
@@ -117,3 +119,24 @@ Use python csv module (?)
 | 4096 -> 8192  | -(Vcc\*2) => 0V      |
 
 
+### Important Equations
+
+#### Bipolar DAC voltage 
+    
+    OUTPUT = 1.987 * X_a - 3300 mV
+    
+    X_a = analog voltage
+          (OUTPUT + Vsupply)    |
+        = ------------------    |
+            1.987               | Vsupply = 3300 mV
+
+    X_d = digital conversion
+           4096 * X_a   |
+        =  ----------   |
+            Vsupply     | Vsupply = 3300mV
+
+#### Desired voltage step to digital step
+
+                    (desiredStepSize + 3300 mV)*4096
+    digitalStep =   -------------------------------
+                            1.987 * 3300 mV
