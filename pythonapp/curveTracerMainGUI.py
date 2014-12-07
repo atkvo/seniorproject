@@ -72,7 +72,6 @@ class MainWindow(QtGui.QWidget):
 
         sweepVoltageMinLabel = QtGui.QLabel("Min Voltage (mV)")
         self.sweepVoltageMin = QtGui.QLineEdit(self)
-        # self.sweepVoltageMin.setFixedWidth(50)
         self.sweepVoltageMin.setMinimumWidth(50)
         self.sweepVoltageMin.setText("-1000")
         # self.sweepVoltageMin.setAlignment(QtCore.Qt.AlignCenter)
@@ -96,6 +95,11 @@ class MainWindow(QtGui.QWidget):
         self.sweepSampleRate.setText("2")
         self.sweepSampleRate.setFixedWidth(60)
 
+        self.vccVoltageLabel = QtGui.QLabel("5V Value (V)")
+        self.vccVoltage = QtGui.QLineEdit(self)
+        self.vccVoltage.setText("5.00")
+        self.vccVoltage.setFixedWidth(50)
+
         self.btnExportLog = QtGui.QPushButton("Export")
         self.btnExportLog.clicked.connect(self.btnExportLogAction)
         self.btnExportLog.setFixedWidth(60)
@@ -107,12 +111,14 @@ class MainWindow(QtGui.QWidget):
         gridSweeper.addWidget(self.sweepVoltageMax, 0, 1)
         gridSweeper.addWidget(sweepVoltageMinLabel, 1, 0)
         gridSweeper.addWidget(self.sweepVoltageMin, 1, 1)
+        gridSweeper.addWidget(self.vccVoltageLabel, 2, 0)
+        gridSweeper.addWidget(self.vccVoltage, 2, 1)
         gridSweeper.addWidget(sweepVoltageIncrLabel, 0, 4)
         gridSweeper.addWidget(self.sweepVoltageIncr, 0, 5)
         gridSweeper.addWidget(self.btnSweepCommand, 0, 6)
         gridSweeper.addWidget(self.sweepSampleRateLabel, 1, 4)
         gridSweeper.addWidget(self.sweepSampleRate, 1, 5)
-        gridSweeper.addWidget(self.btnExportLog, 1, 6)
+        gridSweeper.addWidget(self.btnExportLog, 2, 6)
         self.groupSweeper.setLayout(gridSweeper)
 
         #### STATUS GROUP ###################################

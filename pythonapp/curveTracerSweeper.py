@@ -8,7 +8,7 @@ class SweepThread(QtCore.QThread):
     signalSweepDone = QtCore.pyqtSignal(bool)
     signalUpdateStats = QtCore.pyqtSignal(str, float)
 
-    def __init__(self, mutex, mspInstance, minV, maxV, incr, sampleRate):
+    def __init__(self, mutex, mspInstance, minV, maxV, incr, sampleRate, vcc):
         super(SweepThread, self).__init__()
         self.exiting = False
         self.mutex = mutex
@@ -18,6 +18,7 @@ class SweepThread(QtCore.QThread):
         self.mspInst = mspInstance
         self.sampleRate = int(sampleRate)
         self.numberOfDataPoints = round(4096/self.incrStep)
+        self.VCC = float(vcc)
         print("incr step is: ", self.incrStep)
         print("number of data points: ", self.numberOfDataPoints)
 
@@ -124,7 +125,8 @@ class SweepThread(QtCore.QThread):
         # Should cleanly kill sweep on mutex unlock
 
     def convertRaw(self, rawValue, type):
-        VCC = 5.47  # terms of Volts
+        # VCC = 5.00  # terms of Volts
+        VCC = self.vcc
         ADC_FULLSCALE = 2000*VCC  # 2000 milli * VCC
         """ Convert raw adc voltage to real voltage"""
         rawValue = int(rawValue)
@@ -145,5 +147,6 @@ class SweepThread(QtCore.QThread):
         elif type == "CURRENT":
             # C:V ratio is 1:-1
             print("converted voltage: ", voltage)
-            current = -1 * voltage
+            # current = -1 * voltage
+            current = voltage/(-5)
             return current  # returns current in mA
