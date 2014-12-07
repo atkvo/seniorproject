@@ -81,9 +81,9 @@ class MainWindow(QtGui.QWidget):
         self.sweepVoltageMax.setText("1000")
         self.sweepVoltageMax.setMinimumWidth(50)
 
-        sweepVoltageIncrLabel = QtGui.QLabel("Increment %")
+        sweepVoltageIncrLabel = QtGui.QLabel("Step Size (mV)")
         self.sweepVoltageIncr = QtGui.QLineEdit(self)
-        self.sweepVoltageIncr.setText("5")
+        self.sweepVoltageIncr.setText("10")
         self.sweepVoltageIncr.setMinimumWidth(40)
 
         self.btnSweepCommand = QtGui.QPushButton("SWEEP")

@@ -14,7 +14,8 @@ class SweepThread(QtCore.QThread):
         self.mutex = mutex
         self.minV = int(minV)
         self.maxV = int(maxV)
-        self.incrStep = round(4096*(float(incr)/100))  # 4096 * incr%
+        # self.incrStep = round(4096*(float(incr)/100))  # 4096 * incr%
+        self.incrStep = self.incrementConversion(float(incr))
         self.mspInst = mspInstance
         self.sampleRate = int(sampleRate)
         self.numberOfDataPoints = round(4096/self.incrStep)
@@ -81,16 +82,43 @@ class SweepThread(QtCore.QThread):
     def a2d(self, desiredVoltage):
         """ Convert the desiredVoltage to a digital value for the adc
             Will be used to get the STARTING voltage from minV
-            Voltage unit: mV
-            Equation: Y(+-Out) [mV] = 1.987(X_a) - 3.3
-            X_a = analog voltage = (Y+3.3)/1.987 (if Vsupply = 3.3V)
-            X_d = digital conversion = (3.3)/(4096*X_a)"""
-        DAC_SUPPLY = 3300  # 3.6V supply for DAC
-        #vAnalog = float((desiredVoltage + DAC_SUPPLY)/1.987)  # DAC 3.3V ideal
-        vAnalog = float((desiredVoltage + DAC_SUPPLY)/1.999)  # DAC 3.6V test
+
+            Equations
+            ##############################
+
+            OUTPUT = 1.987 * X_a - 3300 mV
+            X_a = analog voltage
+                  (OUTPUT + Vsupply)    |
+                = ------------------    |
+                    1.987               | Vsupply = 3300 mV
+
+            X_d = digital conversion
+                   4096 * X_a   |
+                =  ----------   |
+                    Vsupply     | Vsupply = 3300mV
+            """
+        DAC_SUPPLY = 3300  # 3.3V supply for DAC
+        vAnalog = float((desiredVoltage + DAC_SUPPLY)/1.987)  # DAC 3.3V ideal
         vDigital = round((4096*vAnalog)/DAC_SUPPLY)
-        print("ANALOG: ", desiredVoltage, "DIGITAL: ", vDigital)
+        # print("ANALOG: ", desiredVoltage, "DIGITAL: ", vDigital)
         return vDigital
+
+    def incrementConversion(self, desiredStepSize):
+        """ desiredStep in mV units
+            This equation will give the necessary digital step to
+            achieve the user desired sweep step in mV
+
+            Equation
+            ################################################
+
+                            (desiredStepSize + 3300 mV)*4096
+            digitalStep =   -------------------------------
+                                    1.987 * 3300 mV
+        """
+        digitalStep = (desiredStepSize + 3300)*4096
+        digitalStep = round(digitalStep/(1.987*3300))
+        print("increment size (digital)", digitalStep)
+        return digitalStep
 
     def readVoltage(self):
         self.mspInst.sendCommand("V?")
