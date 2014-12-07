@@ -48,7 +48,7 @@ Use python csv module (?)
 * (done) Add CSV output ability
 * (done) Add premature sweep stop
 * (done) Fix Pyplot lockup
-* Add user-settable averaging (how many samples per point)
+* (done) Add user-settable averaging (how many samples per point)
 * Use CX_FREEZE to test it under Windows. Nvm, Must be built under Windows also. Installed required libraries on Windows to build already
 
 
