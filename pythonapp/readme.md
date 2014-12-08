@@ -42,6 +42,9 @@ Use python csv module (?)
 
 ### Required Libraries & Links
             
+            Python 3.4.0
+            https://www.python.org/downloads/release/python-340/
+
             PyQt4
             http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyqt4
 
