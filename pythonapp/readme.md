@@ -40,6 +40,27 @@ Use python csv module (?)
 
 ## DEVELOPMENT NOTES
 
+### Required Libraries & Links
+            
+            PyQt4
+            http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyqt4
+
+            Matplotlib
+            http://www.lfd.uci.edu/~gohlke/pythonlibs/#matplotlib
+
+            pySerial
+            http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyserial
+            
+            six
+            http://www.lfd.uci.edu/~gohlke/pythonlibs/#six
+            
+            pyParsing
+            http://www.lfd.uci.edu/~gohlke/pythonlibs/#pyparsing
+            
+            numpy
+            http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy
+
+
 ### TODO (Application still under development 10.25.14)
 
 * (done) Utilize signals & slots (New QT4 style)
