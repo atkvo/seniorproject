@@ -112,13 +112,18 @@ class SweepThread(QtCore.QThread):
             Equation
             ################################################
 
-                            (desiredStepSize + 3300 mV)*4096
+                            (desiredStepSize * 4096)
             digitalStep =   -------------------------------
-                                    1.987 * 3300 mV
+                                    2 * 3300 mV
         """
-        digitalStep = (desiredStepSize + self.VCC3)*4096
-        digitalStep = round(digitalStep/(1.987*self.VCC3))
-        print("increment size (digital)", digitalStep)
+        # digitalStep = (desiredStepSize + self.VCC3)*4096
+        # digitalStep = round(digitalStep/(1.987*self.VCC3))
+        # print("increment size (digital)", digitalStep)
+        # return digitalStep
+        digitalStep = desiredStepSize/2
+        digitalStep = digitalStep/self.VCC3
+        digitalStep = round(digitalStep*4096)
+        print("incremeent size (digital): ", digitalStep)
         return digitalStep
 
     def readVoltage(self):
@@ -155,7 +160,7 @@ class SweepThread(QtCore.QThread):
 
     def convertRaw(self, rawValue, type):
         # VCC = 5.00  # terms of Volts
-        VCC = self.vcc
+        VCC = self.VCC
         ADC_FULLSCALE = 2000*VCC  # 2000 milli * VCC
         """ Convert raw adc voltage to real voltage"""
         rawValue = int(rawValue)
