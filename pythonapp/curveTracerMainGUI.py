@@ -28,7 +28,10 @@ class MainWindow(QtGui.QWidget):
 
         #### MSP CONNECTION CONFIG #########################
         self.mspConfigPortBox = QtGui.QLineEdit(self)
-        self.mspConfigPortBox.setText("/dev/ttyUSB0")
+        if sys.platform == "win32":
+            self.mspConfigPortBox.setText("COM1")
+        else:   
+            self.mspConfigPortBox.setText("/dev/ttyUSB0")
         self.mspConfigBaudBox = QtGui.QLineEdit(self)
         self.mspConfigBaudBox.setText("9600")
 
