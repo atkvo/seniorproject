@@ -15,7 +15,6 @@ from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigCanvas
 from PyQt4 import QtGui, QtCore
 
 
-# If Menubar desired, use QtGui.QMainWindow
 class MainWindow(QtGui.QWidget):
 
     def __init__(self):
@@ -30,7 +29,7 @@ class MainWindow(QtGui.QWidget):
         self.mspConfigPortBox = QtGui.QLineEdit(self)
         if sys.platform == "win32":
             self.mspConfigPortBox.setText("COM1")
-        else:   
+        else:
             self.mspConfigPortBox.setText("/dev/ttyUSB0")
         self.mspConfigBaudBox = QtGui.QLineEdit(self)
         self.mspConfigBaudBox.setText("9600")
@@ -98,10 +97,20 @@ class MainWindow(QtGui.QWidget):
         self.sweepSampleRate.setText("2")
         self.sweepSampleRate.setFixedWidth(60)
 
-        self.vccVoltageLabel = QtGui.QLabel("5V Value (V)")
-        self.vccVoltage = QtGui.QLineEdit(self)
-        self.vccVoltage.setText("5.00")
-        self.vccVoltage.setFixedWidth(50)
+        self.vcc5VoltageLabel = QtGui.QLabel("5V Value (V)")
+        self.vcc5Voltage = QtGui.QLineEdit(self)
+        self.vcc5Voltage.setText("5.00")
+        self.vcc5Voltage.setFixedWidth(50)
+
+        self.vcc3VoltageLabel = QtGui.QLabel("3.3V Value (V)")
+        self.vcc3Voltage = QtGui.QLineEdit(self)
+        self.vcc3Voltage.setText("3.30")
+        self.vcc3Voltage.setFixedWidth(50)
+
+        self.currentGainLabel = QtGui.QLabel("Shunt Resistor Gain")
+        self.currentGain = QtGui.QLineEdit(self)
+        self.currentGain.setText("-50")
+        self.currentGain.setFixedWidth(50)
 
         self.btnExportLog = QtGui.QPushButton("Export")
         self.btnExportLog.clicked.connect(self.btnExportLogAction)
@@ -114,14 +123,18 @@ class MainWindow(QtGui.QWidget):
         gridSweeper.addWidget(self.sweepVoltageMax, 0, 1)
         gridSweeper.addWidget(sweepVoltageMinLabel, 1, 0)
         gridSweeper.addWidget(self.sweepVoltageMin, 1, 1)
-        gridSweeper.addWidget(self.vccVoltageLabel, 2, 0)
-        gridSweeper.addWidget(self.vccVoltage, 2, 1)
+        gridSweeper.addWidget(self.vcc5VoltageLabel, 2, 0)
+        gridSweeper.addWidget(self.vcc5Voltage, 2, 1)
+        gridSweeper.addWidget(self.vcc3VoltageLabel, 3, 0)
+        gridSweeper.addWidget(self.vcc3Voltage, 3, 1)
+        gridSweeper.addWidget(self.currentGainLabel, 4, 0)
+        gridSweeper.addWidget(self.currentGain, 4, 1)
         gridSweeper.addWidget(sweepVoltageIncrLabel, 0, 4)
         gridSweeper.addWidget(self.sweepVoltageIncr, 0, 5)
-        gridSweeper.addWidget(self.btnSweepCommand, 0, 6)
         gridSweeper.addWidget(self.sweepSampleRateLabel, 1, 4)
         gridSweeper.addWidget(self.sweepSampleRate, 1, 5)
-        gridSweeper.addWidget(self.btnExportLog, 2, 6)
+        gridSweeper.addWidget(self.btnSweepCommand, 3, 6)
+        gridSweeper.addWidget(self.btnExportLog, 4, 6)
         self.groupSweeper.setLayout(gridSweeper)
 
         #### STATUS GROUP ###################################
@@ -179,11 +192,13 @@ class MainWindow(QtGui.QWidget):
             minV = self.sweepVoltageMin.text()
             incr = self.sweepVoltageIncr.text()
             sampleRate = self.sweepSampleRate.text()
-            vccVoltage = self.vccVoltage.text()
+            vcc5Voltage = self.vcc5Voltage.text()
+            vcc3Voltage = self.vcc3Voltage.text()
+            currentGain = self.currentGain.text()
             try:
                 self.c = cts.SweepThread(self.mutex, self.mspInst,
                                          minV, maxV, incr, sampleRate,
-                                         vccVoltage)
+                                         vcc5Voltage, vcc3Voltage, currentGain)
                 self.c.signalSweepDone.connect(self.sweepDoneAction)
                 self.c.signalUpdateStats.connect(self.updateStats)
                 self.c.begin()
