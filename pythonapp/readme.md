@@ -15,12 +15,13 @@ Purpose:    Controls the MSP430 and interprets data to/from it
 
         * when to start
         * when to end
-        * voltage increment steps (0.5, 1, 1.8, 2, 3, 4.. 99.9, 100% of Range)
+        * voltage increment steps 
         * Live plot - Simple visualization of IV curve. Use CSV export & Excel for more robust plotting
+            * Note, live plots will seem very unstable during initial samples since the scaling for the plot is very small until more data is sampled + plotted.
 
 ### How does voltage sweep work
 
-    Send DAC value (Difference amplifier causes Vout swing to +- 3.3V)
+    Send DAC value (Difference amplifier causes Vout swing from +- 3.3V)
     Read voltage across Solar Cell and from Imonitor pin and do necessary conversions
 
 Other options:
@@ -38,9 +39,10 @@ Use python csv module (?)
     x,x\n
 
 
-## DEVELOPMENT NOTES
-
 ### Required Libraries & Links
+
+            USB to UART Driver (CP210x from Silicon Labs)
+            http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx
             
             Python 3.4.0
             https://www.python.org/downloads/release/python-340/
@@ -63,8 +65,71 @@ Use python csv module (?)
             numpy
             http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy
 
+### Usage
 
-### TODO (Application still under development 10.25.14)
+    0. Install all drivers and code components
+    1. Select COM port
+    2. Setup desired sweep range
+    3. Check sweep calibration parameters
+    4. Click "sweep"
+    5. Wait for sweep to finish
+        5.1. Note: If taking large amount of data points, application may "hang" for a bit when data is compiled up, but all is well
+    6. Export data
+        6.1. Name the file with a **.csv** extension so Excel will automatically open when double clicking the file
+
+
+### COMMAND LIST
+
+| COMMAND   | Description                                  |
+| --------- | -------------------------------------------- |
+| !V=XXXX\* | Give DAC an output voltage. Must be 4 digits |
+| !C?\*     | Read Imonitor                                |
+| !V?\*     | Read DUT Voltage                             |
+
+
+
+
+## DEVELOPMENT NOTES
+
+Notes related to the development of the code. Should be important to those who edit the code for themselves.
+
+
+    curveTracerMainGUI.py - Main GUI code. Does all the interface with the user and hardware. Calls on curveTracerSerial & curveTracerSweeper as "components"
+
+    curveTracerSerial.py - Responsible for establishing connection with the MSP430 and formatting commands
+
+    curveTracerSweeper.py - Responsible for the automatic sweeping thread. Contains all the math and conversion algorithms as well.
+
+
+### Important Equations & Notes
+
+#### Bipolar DAC voltage 
+    
+    OUTPUT = 1.987 * X_a - 3300 mV
+    
+    X_a = analog voltage
+          (OUTPUT + Vsupply)    |
+        = ------------------    |
+            1.987               | Vsupply = 3300 mV
+
+    X_d = digital conversion
+           4096 * X_a   |
+        =  ----------   |
+            Vsupply     | Vsupply = 3300mV
+
+#### Desired voltage step to digital step
+
+                    (desiredStepSize * 4096)
+    digitalStep =   -------------------------------
+                            2 * VCC3
+
+#### ADC CONVERSION TABLE
+
+| ADC RAW       | Conversion           |
+| ------------- | -------------------- |
+| 0 -> 4095     | 0 -> +(Vcc\*2)       |
+| 4096 -> 8192  | -(Vcc\*2) => 0V      |
+### TODO
 
 * (done) Utilize signals & slots (New QT4 style)
 * (done) Fix GUI lockup during thread object. (Not behaving like a separate thread...
@@ -73,10 +138,15 @@ Use python csv module (?)
 * (done) Add premature sweep stop
 * (done) Fix Pyplot lockup
 * (done) Add user-settable averaging (how many samples per point)
-* Use CX_FREEZE to test it under Windows. Nvm, Must be built under Windows also. Installed required libraries on Windows to build already
 
 
 ### Changelog
+#### 12.11.14
+* Fixed increment voltage formula
+* Added user settable VCC3 and current gain 
+* Clean out some comments
+* Added safety check to make sure step size is > 2 mV
+
 #### 12.06.14 06:00 PM
 * Added adjustable 5V Calibration for ADC 
 * Change increment % -> Step size (mV)
@@ -124,43 +194,3 @@ Use python csv module (?)
 * Fixed GUI lockup. Solution: Call thread object as self.thread
 * Added initial signal & slot work (Signals: when sweep starts, stopped, and updating voltage/current stats)
  
-
-
-### COMMAND LIST
-
-| COMMAND   | Description                                  |
-| --------- | -------------------------------------------- |
-| !V=XXXX\* | Give DAC an output voltage. Must be 4 digits |
-| !C?\*     | Read Imonitor                                |
-| !V?\*     | Read DUT Voltage                             |
-
-
-### ADC CONVERSION TABLE
-
-| ADC RAW       | Conversion           |
-| ------------- | -------------------- |
-| 0 -> 4095     | 0 -> +(Vcc\*2)       |
-| 4096 -> 8192  | -(Vcc\*2) => 0V      |
-
-
-### Important Equations
-
-#### Bipolar DAC voltage 
-    
-    OUTPUT = 1.987 * X_a - 3300 mV
-    
-    X_a = analog voltage
-          (OUTPUT + Vsupply)    |
-        = ------------------    |
-            1.987               | Vsupply = 3300 mV
-
-    X_d = digital conversion
-           4096 * X_a   |
-        =  ----------   |
-            Vsupply     | Vsupply = 3300mV
-
-#### Desired voltage step to digital step
-
-                    (desiredStepSize + 3300 mV)*4096
-    digitalStep =   -------------------------------
-                            1.987 * 3300 mV
