@@ -12,7 +12,7 @@ class SweepThread(QtCore.QThread):
                  sampleRate, vcc5, vcc3, currentGain):
         super(SweepThread, self).__init__()
         # self.VCC3 = 3300
-        self.VCC3 = float(vcc3)
+        self.VCC3 = float(vcc3)*1000
         self.VCC5 = float(vcc5)
         self.currentGain = float(currentGain)/10
         self.exiting = False
@@ -178,6 +178,6 @@ class SweepThread(QtCore.QThread):
         elif type == "CURRENT":
             # C:V ratio is 1:-5
             print("converted voltage: ", voltage)
-            current = voltage/(-5)
+            # current = voltage/(-5)
             current = voltage/self.currentGain
             return current  # returns current in mA
